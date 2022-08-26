@@ -20,11 +20,12 @@
       "**/CVS": true,
    },
    "files.autoSave": "off",
-   "workbench.colorTheme": "Visual Studio Dark",
+   "workbench.colorTheme": "Ayu Mirage Bordered",
    "terminal.integrated.gpuAcceleration": "canvas",
    "python.formatting.provider": "autopep8",
    "python.languageServer": "None",
    "python.linting.flake8Args": [
       "--verbose",
    ],
+   "editor.formatOnSave": true,
 }
