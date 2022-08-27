@@ -28,4 +28,7 @@
       "--verbose",
    ],
    "editor.formatOnSave": true,
+   "emmet.includeLanguages": {
+      "django-html": "html"
+   },
 }
