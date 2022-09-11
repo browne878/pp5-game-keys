@@ -7,6 +7,12 @@
     
     
 {% block content %}
+    <script>
+        console.log({{ MEDIA_URL }});
+    </script>
     {% include 'components/headers/brand_and_search.html' %}
-    {% include 'components/nav/categories.html' %}
+
+    <img src="{{ MEDIA_URL }}fps_soldier.jpg" alt="fps soldier">
+
+    
 {% endblock %}
