@@ -11,3 +11,6 @@ cloudinary_python.txt
 *.pyc
 .env/
 jsconfig.json
+formattedGames.json
+formatter.js
+games.json
