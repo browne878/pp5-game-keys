@@ -31,4 +31,5 @@
    "emmet.includeLanguages": {
       "django-html": "html"
    },
+   "python.terminal.activateEnvInCurrentTerminal": true,
 }

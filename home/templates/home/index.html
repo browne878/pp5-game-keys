@@ -2,17 +2,19 @@
 {% load static %}
 
 {% block nav %}
-    {% include 'components/nav/nav.html' %}
+{% include 'components/nav/nav.html' %}
 {% endblock %}
-    
-    
+
+
 {% block content %}
-    <script>
-        console.log({{ MEDIA_URL }});
-    </script>
-    {% include 'components/headers/brand_and_search.html' %}
+{% include 'components/headers/brand_and_search.html' %}
 
-    <img src="{{ MEDIA_URL }}fps_soldier.jpg" alt="fps soldier">
+<div class="hero">
+    <div class="hero-text bg-light">
+        <h2>Browse our range of <strong>Cheap Games</strong> by clicking the button below</h2>
+        <a class="btn btn-secondary" href="#" role="button">Browse</a>
+    </div>
+</div>
 
-    
+{% include 'components/footer/footer.html' %}
 {% endblock %}
