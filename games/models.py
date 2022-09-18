@@ -15,14 +15,15 @@ class Game(models.Model):
     name = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
     year = models.PositiveIntegerField(
-        validators=[MinValueValidator(1970), MaxValueValidator(2022)])
+        validators=[MinValueValidator(1970), MaxValueValidator(2022)],
+        null=True, blank=True
+    )
     developer = models.CharField(max_length=100)
     publisher = models.CharField(max_length=100)
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
     rating = models.PositiveIntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(5)], default=0)
-    image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
 
     def __str__(self):

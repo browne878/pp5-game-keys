@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block nav %}
+{% include 'components/nav/nav.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'components/headers/brand_and_search.html' %}
+{% include 'components/nav/categories.html' %}
+
+
+{% include 'components/footer/footer.html' %}
+{% endblock %}

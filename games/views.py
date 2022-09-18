@@ -15,16 +15,16 @@ def all_games(request):
     return render(request, "games/games.html", context)
 
 
-def game_detail(request, pk):
+def game_detail(request, game_id):
     """ A view to show individual game details """
 
-    game = get_object_or_404(Game, pk=pk)
+    game = get_object_or_404(Game, id=game_id)
 
     context = {
         'game': game,
     }
 
-    return render(request, "game_detail.html", context)
+    return render(request, "games/game_detail.html", context)
 
 
 @login_required
