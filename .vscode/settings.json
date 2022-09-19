@@ -32,4 +32,19 @@
       "django-html": "html"
    },
    "python.terminal.activateEnvInCurrentTerminal": true,
+   "djlint.enableLinting": false,
+   "[html]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+   },
+   "[django-html]": {
+      "editor.formatOnSave": false,
+   },
+   "emeraldwalk.runonsave": {
+      "commands": [
+         {
+            "match": ".*/templates/.*\\.html$", // only in templates dir
+            "cmd": "djhtml -i ${file}"
+         },
+      ]
+   },
 }

@@ -21,22 +21,22 @@ def game_detail(request, game_id):
     game = get_object_or_404(Game, id=game_id)
 
     context = {
-        'game': game,
+        'game': game
     }
 
     return render(request, "games/game_detail.html", context)
 
 
-@login_required
+@ login_required
 def add_game(request):
     return render(request, "add_game.html")
 
 
-@login_required
+@ login_required
 def edit_game(request, pk):
     return render(request, "edit_game.html")
 
 
-@login_required
+@ login_required
 def delete_game(request, pk):
     return render(request, "delete_game.html")

@@ -2,13 +2,95 @@
 {% load static %}
 
 {% block nav %}
-{% include 'components/nav/nav.html' %}
+    {% include 'components/nav/nav.html' %}
 {% endblock %}
 
 {% block content %}
-{% include 'components/headers/brand_and_search.html' %}
-{% include 'components/nav/categories.html' %}
+    {% include 'components/headers/brand_and_search.html' %}
+    {% include 'components/nav/categories.html' %}
+
+    <div class="text-center my-5">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'games' %}">Games</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ game.title }}</li>
+            </ol>
+        </nav>
+
+        <h2 class="m-3">{{ game.title }}</h2>
+
+        <div class="image-container">
+            {% if game.image %}
+                <img src="{{ game.image.url }}" alt="{{ game.title }} image" class="my-3" />
+            {% else %}
+                <img src="{{ MEDIA_URL }}noimage.jpg" alt="{{ game.title }} image" class="my-3" />
+            {% endif %}
+        </div>
+
+        <h5>£{{ game.price }}</h5>
+
+        {% if game.status == '1' %}
+            <button class="btn btn-secondary">Add to Cart</button>
+        {% elif game.status == '2' %}
+            <button class="btn btn-secondary disabled">Back Ordered</button>
+        {% elif game.status == '3' %}
+            <button class="btn btn-secondary disabled">Out of Stock</button>
+        {% endif %}
+
+        <div class="my-3">
+            {% with '1 2 3 4 5' as ratingArray %}
+
+                {% for i in ratingArray.split %}
+                    {% if game.rating >= i|add:"0" %}
+                        <i class="fa-solid fa-star"></i>
+                    {% else %}
+                        <i class="fa-regular fa-star"></i>
+                    {% endif %}
+                {% endfor %}
+
+            {% endwith %}
+        </div>
 
 
-{% include 'components/footer/footer.html' %}
+        <div class="collapse-menus my-3">
+            <button class="btn background-grey w-75" data-target="#description-collapse" data-toggle="collapse"
+                aria-expanded="false" aria-controls="description-collapse">Description <i
+                    class="fa-solid fa-caret-down"></i></button>
+            <div id="description-collapse" class="collapse">
+                <p class="m-3">{{ game.description }}</p>
+            </div>
+        </div>
+
+        <div class="collapse-menus my-3">
+            <button class="btn background-grey w-75" data-target="#details-collapse" data-toggle="collapse"
+                aria-expanded="false" aria-controls="details-collapse">Details <i
+                    class="fa-solid fa-caret-down"></i></button>
+            <div id="details-collapse" class="collapse">
+                <ul class="list-group list-group-horizontal details-list mt-3">
+                    <li class="list-group-item">Year</li>
+                    <li class="list-group-item">{{ game.year }}</li>
+                </ul>
+                <ul class="list-group list-group-horizontal details-list">
+                    <li class="list-group-item">Developer</li>
+                    <li class="list-group-item">{{ game.developer }}</li>
+                </ul>
+                <ul class="list-group list-group-horizontal details-list">
+                    <li class="list-group-item">Publisher</li>
+                    <li class="list-group-item">{{ game.publisher }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="collapse-menus my-3">
+            <button class="btn background-grey w-75" data-target="#shipping-collapse" data-toggle="collapse"
+                aria-expanded="false" aria-controls="shipping-collapse">Shipping <i
+                    class="fa-solid fa-caret-down"></i></button>
+            <div id="shipping-collapse" class="collapse">
+                <p class="m-3">All games will be delivered as keys to your email address.</p>
+            </div>
+        </div>
+    </div>
+
+    {% include 'components/footer/footer.html' %}
 {% endblock %}

@@ -3,6 +3,12 @@
     padding: 0;
 }
 
+/* reusable classes */
+
+.background-grey {
+    background-color: #e9ecef;
+}
+
 /* home */
 
 .hero {
@@ -45,6 +51,27 @@
     width: 100%;
 }
 
+/* game details */
+
+.details-list {
+    width: 90%;
+    margin: auto;
+}
+
+.details-list>li {
+    width: 50%;
+}
+
+.image-container>img {
+    width: 100%;
+    height: 286px;
+    object-fit: contain;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* media queries */
 
 /* bootstrap sm */
@@ -64,6 +91,12 @@
 
     .hero-text {
         margin: 0 10%;
+    }
+
+    /* game details */
+
+    #description-collapse {
+        margin: 20px 30px;
     }
 }
 

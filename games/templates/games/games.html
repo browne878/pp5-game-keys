@@ -2,65 +2,67 @@
 {% load static %}
 
 {% block nav %}
-{% include 'components/nav/nav.html' %}
+    {% include 'components/nav/nav.html' %}
 {% endblock %}
 
 {% block content %}
-{% include 'components/headers/brand_and_search.html' %}
-{% include 'components/nav/categories.html' %}
+    {% include 'components/headers/brand_and_search.html' %}
+    {% include 'components/nav/categories.html' %}
 
-<div class="container">
-    <div class="row">
+    <div class="container">
+        <div class="row">
 
-    <!-- Game Cards -->
-    {% for game in games %}
+            <!-- Game Cards -->
+            {% for game in games %}
 
-        <div class="game-card-container col-12 col-md-6 col-xl-4">
-            <div class="card text-center game-card" style="width: 18rem;">
-                {% if game.image %}
-                    <div class="card-image-container">
-                        <img src="{{ game.image.url }}" class="card-img-top" alt="{{ game.title }} image">
-                    </div>
-                {% else %}
-                    <div class="card-image-container">
-                        <img src="{{ MEDIA_URL }}noimage.jpg" class="card-img-top" alt="{{ game.title }} image">
-                    </div>
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title">{{ game.title }}</h5>
-                    <p class="card-text">
-                        {{ game.description|truncatechars:100 }}
-                    </p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{ game.publisher }}</li>
-                    <li class="list-group-item">£{{ game.price }}</li>
-                    <li class="list-group-item">
-                        {% with '1 2 3 4 5' as ratingArray %}
-                        
-                        {% for i in ratingArray.split %}
-                        {% if game.rating >= i|add:"0" %}
-                        <i class="fa-solid fa-star"></i>
+                <div class="game-card-container col-12 col-md-6 col-xl-4">
+                    <div class="card text-center game-card" style="width: 18rem;">
+                        {% if game.image %}
+                            <div class="card-image-container">
+                                <a href="{% url 'game_detail' game.id %}">
+                                    <img src="{{ game.image.url }}" class="card-img-top" alt="{{ game.title }} image">
+                                </a>
+                            </div>
                         {% else %}
-                        <i class="fa-regular fa-star"></i>
+                            <div class="card-image-container">
+                                <img src="{{ MEDIA_URL }}noimage.jpg" class="card-img-top" alt="{{ game.title }} image">
+                            </div>
                         {% endif %}
-                        {% endfor %}
-                        
-                        {% endwith %}
-                    </li>
-                </ul>
-                <div class="card-body">
-                    <a href="#" class="card-link">More Info</a>
-                    <a href="#" class="card-link">Add to Cart</a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ game.title }}</h5>
+                            <p class="card-text">
+                                {{ game.description|truncatechars:100 }}
+                            </p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{ game.publisher }}</li>
+                            <li class="list-group-item">£{{ game.price }}</li>
+                            <li class="list-group-item">
+                                {% with '1 2 3 4 5' as ratingArray %}
+
+                                    {% for i in ratingArray.split %}
+                                        {% if game.rating >= i|add:"0" %}
+                                            <i class="fa-solid fa-star"></i>
+                                        {% else %}
+                                            <i class="fa-regular fa-star"></i>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                {% endwith %}
+                            </li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="{% url 'game_detail' game.id %}" class="card-link">More Info</a>
+                            <a href="#" class="card-link">Add to Cart</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+            {% endfor %}
+
         </div>
-        
-        {% endfor %}
-        
     </div>
-</div>
-    
-    
+
+
     {% include 'components/footer/footer.html' %}
 {% endblock %}
