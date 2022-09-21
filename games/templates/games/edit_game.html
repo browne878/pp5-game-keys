@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block nav %}
+    {% include 'components/nav/nav.html' %}
+{% endblock %}
+
+
+{% block content %}
+    {% include 'components/headers/brand_and_search.html' %}
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-12">
+                <hr>
+                <h2 class="logo-font mb-4">Game Management</h2>
+                <h5 class="text-muted">Edit a Game</h5>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <form method="POST" action="{% url 'edit_game' game.id %}" class="form mb-2 game-form"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% if field.name != 'image' %}
+                            {% if field.name == 'year' %}
+                                <div id="div_id_year" class="control-group">
+                                    <label for="id_year" class="control_label requiredField">Year</label>
+                                    <div class="controls">
+                                        <input type="number" name="year" min="1970" max="2022" class="numberinput" id="id_year">
+                                    </div>
+                                </div>
+                            {% else %}
+                                {{ field | as_crispy_field }}
+                            {% endif %}
+                        {% else %}
+                            {{ field }}
+                        {% endif %}
+                    {% endfor %}
+                    <div>
+                        <a class="btn background-grey btn-outline-dark" href="{% url 'games' %}">Cancel</a>
+                        <button class="btn background-grey btn-outline-dark" type="submit">Add Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% include 'components/footer/footer.html' %}
+{% endblock content %}

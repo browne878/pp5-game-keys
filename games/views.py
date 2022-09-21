@@ -47,8 +47,25 @@ def add_game(request):
 
 
 @ login_required
-def edit_game(request, pk):
-    return render(request, "edit_game.html")
+def edit_game(request, game_id):
+
+    game = get_object_or_404(Game, id=game_id)
+
+    if request.method == 'POST':
+        form = GameForm(request.POST, request.FILES, instance=game)
+        if form.is_valid():
+            form.save()
+            return redirect('game_detail', game_id=game.id)
+    else:
+        form = GameForm(instance=game)
+
+    template = 'games/edit_game.html'
+    context = {
+        'form': form,
+        'game': game,
+    }
+
+    return render(request, template, context)
 
 
 @ login_required
