@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
 from .models import Game
+from .forms import GameForm
 
 
 def all_games(request):
@@ -29,7 +30,20 @@ def game_detail(request, game_id):
 
 @ login_required
 def add_game(request):
-    return render(request, "add_game.html")
+    if request.method == 'POST':
+        form = GameForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('games')
+    else:
+        form = GameForm()
+
+    template = 'games/add_game.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
 
 
 @ login_required

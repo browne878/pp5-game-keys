@@ -69,7 +69,14 @@
             <div id="details-collapse" class="collapse">
                 <ul class="list-group list-group-horizontal details-list mt-3">
                     <li class="list-group-item">Year</li>
-                    <li class="list-group-item">{{ game.year }}</li>
+
+
+                    {% if game.year %}
+                        <li class="list-group-item">{{ game.year }}</li>
+                    {% else %}
+                        <li class="list-group-item">N/A</li>
+                    {% endif %}
+
                 </ul>
                 <ul class="list-group list-group-horizontal details-list">
                     <li class="list-group-item">Developer</li>

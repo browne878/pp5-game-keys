@@ -72,6 +72,22 @@
     align-items: center;
 }
 
+/* add game */
+
+.game-form {
+    width: 90%;
+    margin: auto;
+}
+
+.game-form textarea {
+    width: 15em;
+}
+
+.game-form input:is([type="file"]) {
+    width: 15em;
+}
+
+
 /* media queries */
 
 /* bootstrap sm */
