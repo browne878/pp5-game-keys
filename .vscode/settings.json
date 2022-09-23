@@ -23,7 +23,6 @@
    "workbench.colorTheme": "Ayu Mirage Bordered",
    "terminal.integrated.gpuAcceleration": "canvas",
    "python.formatting.provider": "autopep8",
-   "python.languageServer": "None",
    "python.linting.flake8Args": [
       "--verbose",
    ],
@@ -47,4 +46,10 @@
          },
       ]
    },
+   "python.autoComplete.extraPaths": [
+      "~/Documents/projects/Personal/pp5-game-keys/.env/lib/python3.10/site-packages",
+   ],
+   "python.analysis.extraPaths": [
+      "~/Documents/projects/Personal/pp5-game-keys/.env/lib/python3.10/site-packages"
+   ],
 }

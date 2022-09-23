@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 from .models import Game
 from .forms import GameForm
@@ -30,6 +31,7 @@ def game_detail(request, game_id):
 
 @ login_required
 def add_game(request):
+    """ Add a game to the store """
     if request.method == 'POST':
         form = GameForm(request.POST, request.FILES)
         if form.is_valid():
@@ -48,6 +50,7 @@ def add_game(request):
 
 @ login_required
 def edit_game(request, game_id):
+    """ Edit a game in the store """
 
     game = get_object_or_404(Game, id=game_id)
 
@@ -69,5 +72,14 @@ def edit_game(request, game_id):
 
 
 @ login_required
-def delete_game(request, pk):
-    return render(request, "delete_game.html")
+def delete_game(request, game_id):
+    """ Delete a game from the store """
+
+    game = get_object_or_404(Game, id=game_id)
+    game.delete()
+    return redirect('games')
+
+    game = get_object_or_404(Game, id=game_id)
+    game.delete()
+
+    return redirect('games')
