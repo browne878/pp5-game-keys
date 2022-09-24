@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_tools %}
+
+{% block nav %}
+    {% include 'components/nav/nav.html' %}
+{% endblock %}
+
+
+{% block content %}
+    {% include 'components/headers/brand_and_search.html' %}
+    {% include 'components/nav/categories.html' %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Shopping Cart</h2>
+            </div>
+        </div>
+        <div class="row">
+
+            {% for game in cart_items %}
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img src="{{ game.game.image.url }}" class="img-fluid" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <h5 class="card-title">{{ game.game.title }}</h5>
+                                    <p class="card-text">{{ game.game.description }}</p>
+                                    <p class="card-text">Price: ${{ game.game.price }}</p>
+                                    <div class="btn-group mb-3" role="group" aria-label="Item Count Controls">
+                                        <button class="btn btn-secondary decrement-quantity" type="button"><i
+                                            class="fas fa-minus"></i></button>
+                                        <form class="add-to-cart-form game-quantity-form"
+                                            action="{% url 'modify_cart' game.game.id %}" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="game_id" value="{{ game.game.id }}">
+                                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                            <input class="text-center game-quantity" type="number" name="quantity" min="0"
+                                                max="5" value="{{ game.quantity }}">
+                                        </form>
+                                        <button class="btn btn-secondary increment-quantity" type="button"><i
+                                            class="fas fa-plus"></i></button>
+                                    </div>
+                                    <p class="card-text">Total: ${{ game.game.price|item_total:game.quantity }}</p>
+                                </div>
+                                <div class="col-md-2 text-center text-md-right m-3 m-md-0">
+                                    <form action="{% url 'remove_from_cart' game.game.id %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="game_id" value="{{ game.game.id }}">
+                                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center m-4 text-xl-right">
+                <h3>Total: ${{ total }}</h2>
+                <a href="" class="btn btn-secondary">Proceed to Checkout</a>
+            </div>
+        </div>
+    </div>
+
+    {% block postloadjs %}
+        <script src="{% static 'js/game_quantity.js' %}"></script>
+    {% endblock %}
+
+    {% include 'components/footer/footer.html' %}
+{% endblock content %}

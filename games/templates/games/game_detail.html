@@ -37,32 +37,18 @@
                 {% if cart_items|length > 0 %}
                     {% for item in cart_items %}
                         {% if item.game_id|add:0 == game.id|add:0 %}
-                            <button class="btn btn-secondary" type="button" id="decrement_quantity"><i
-                                class="fas fa-minus"></i></button>
+                            <button class="btn btn-secondary decrement-quantity" type="button"><i class="fas fa-minus"></i></button>
                         {% endif %}
                     {% endfor %}
                 {% endif %}
 
-                <!-- <form class="add-to-cart-form" action="{% url 'modify_cart' game.id %}" method="post"
-                                    id="game_quantity_form">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="game_id" value="{{ game.id }}">
-                                    <input type="hidden" name="quantity" value="1">
-                                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                                    <input class="text-center" type="number" name="quantity" id="game-quantity" min="0" max="5"
-                                        value="{{ item.quantity }}">
-                                </form> -->
-
-
                 {% if game.status == '1' %}
                     {% if game.id|in_list:cart_items %}
-                        <form class="add-to-cart-form" action="{% url 'modify_cart' game.id %}" method="post"
-                            id="game_quantity_form">
+                        <form class="add-to-cart-form game-quantity-form" action="{% url 'modify_cart' game.id %}" method="post">
                             {% csrf_token %}
                             <input type="hidden" name="game_id" value="{{ game.id }}">
-                            <input type="hidden" name="quantity" value="1">
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                            <input class="text-center" type="number" name="quantity" id="game-quantity" min="0" max="5"
+                            <input class="text-center game-quantity" type="number" name="quantity" min="0" max="5"
                                 value="{{ game.id|item_quantity:cart_items }}">
                         </form>
                     {% else %}
@@ -84,7 +70,7 @@
                 {% if cart_items|length > 0 %}
                     {% for item in cart_items %}
                         {% if item.game_id|add:0 == game.id|add:0 %}
-                            <button class="btn btn-secondary" type="button" id="increment-quantity"><i class="fas fa-plus"></i></button>
+                            <button class="btn btn-secondary increment-quantity" type="button"><i class="fas fa-plus"></i></button>
                         {% endif %}
                     {% endfor %}
                 {% endif %}

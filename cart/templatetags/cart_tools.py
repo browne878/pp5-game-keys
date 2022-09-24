@@ -25,3 +25,10 @@ def item_quantity(value, list):
             return item.get('quantity')
 
     return 0
+
+
+@register.filter(name='item_total')
+def item_total(value, quantity):
+    """ Gets the total price of item """
+
+    return value * quantity

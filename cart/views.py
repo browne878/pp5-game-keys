@@ -3,7 +3,8 @@ from django.shortcuts import (
     render,
     redirect,
     HttpResponse,
-    get_object_or_404
+    get_object_or_404,
+    reverse
 )
 
 
@@ -46,11 +47,13 @@ def modify_cart(request, game_id):
 
 def remove_from_cart(request, game_id):
     """ Remove the item from the shopping cart """
+    redirect_url = request.POST.get('redirect_url')
+
     try:
         cart = request.session.get('cart', {})
-        cart.pop(game_id)
+        cart.pop(f"{game_id}")
         request.session['cart'] = cart
-        return HttpResponse(status=200)
+        return redirect(redirect_url)
 
     except Exception:
         return HttpResponse(status=500)

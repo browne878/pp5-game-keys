@@ -9,6 +9,24 @@
     background-color: #e9ecef;
 }
 
+/* components */
+
+.footer {
+    bottom: 0;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.footer>p {
+    margin: 0;
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
+.footer>ul {
+    padding-top: 10px;
+}
+
 /* home */
 
 .hero {
@@ -25,14 +43,6 @@
 
 .hero-text>a {
     margin: 10px 0;
-}
-
-/* components */
-
-.footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
 }
 
 /* all games */
@@ -84,13 +94,13 @@
     align-items: center;
 }
 
-#game-quantity {
+.game-quantity {
     width: 100px;
     height: 40px;
 }
 
-#game-quantity::-webkit-inner-spin-button,
-#game-quantity::-webkit-outer-spin-button {
+.game-quantity::-webkit-inner-spin-button,
+.game-quantity::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
