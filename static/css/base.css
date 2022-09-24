@@ -49,8 +49,6 @@
     width: 100%;
     height: 286px;
     overflow: hidden;
-
-    /* vertically alighn image to center */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,6 +56,11 @@
 
 .card-image-container>img {
     width: 100%;
+}
+
+.card-submit {
+    color: #007bff;
+    padding: 0 !important;
 }
 
 /* game details */
@@ -79,6 +82,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#game-quantity {
+    width: 100px;
+    height: 40px;
+}
+
+#game-quantity::-webkit-inner-spin-button,
+#game-quantity::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* add game */
