@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <title>{% block head_title %}{% endblock %}</title>
         {% block extra_head %}
         {% endblock %}
     </head>
+
     <body>
+        {% block nav %}
+        {% endblock %}
         {% block body %}
 
             {% if messages %}
@@ -37,4 +41,5 @@
         {% block extra_body %}
         {% endblock %}
     </body>
+
 </html>

@@ -4,7 +4,6 @@ from django.shortcuts import (
     redirect,
     HttpResponse,
     get_object_or_404,
-    reverse
 )
 
 
