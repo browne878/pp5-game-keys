@@ -30,7 +30,7 @@ if 'ENV' in os.environ:
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'game-keys.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'browne878-game-keys.herokuapp.com']
 
 # Application definition
 
@@ -109,17 +109,17 @@ WSGI_APPLICATION = 'game_keys.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse('postgres://otjxjqmbyrvjuj:f1c4d189c1614228c5fed6c08f5f359cc88c1539cce8b847efa44c2e525eb0eb@ec2-54-228-32-29.eu-west-1.compute.amazonaws.com:5432/d2pte954n3nika')
     }
-}
-
-# DATABASES = {
-#     'default': dj_database_url.parse('postgres://otjxjqmbyrvjuj:f1c4d189c1614228c5fed6c08f5f359cc88c1539cce8b847efa44c2e525eb0eb@ec2-54-228-32-29.eu-west-1.compute.amazonaws.com:5432/d2pte954n3nika')
-# }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
