@@ -4,8 +4,8 @@
    "python.linting.pep8Enabled": false,
    "python.linting.flake8Enabled": true,
    "python.terminal.activateEnvironment": true,
-   "python.formatting.autopep8Path": "~/Documents/projects/Personal/pp5-game-keys/.env/bin/autopep8",
-   "python.linting.flake8Path": "~/Documents/projects/Personal/pp5-game-keys/.env/bin/flake8",
+   "python.formatting.autopep8Path": "F:/New_Github/pp5-game-keys/.venv/Scripts/autopep8",
+   "python.linting.flake8Path": "F:/New_Github/pp5-game-keys/.venv/Scripts/flake8",
    "files.exclude": {
       "**/.DS_Store": true,
       "**/.git": true,
@@ -20,7 +20,6 @@
       "**/CVS": true,
    },
    "files.autoSave": "off",
-   "workbench.colorTheme": "Ayu Mirage Bordered",
    "terminal.integrated.gpuAcceleration": "canvas",
    "python.formatting.provider": "autopep8",
    "python.linting.flake8Args": [
@@ -28,7 +27,9 @@
    ],
    "editor.formatOnSave": true,
    "emmet.includeLanguages": {
-      "django-html": "html"
+      "django-html": "html",
+      "django": "html",
+      "html": "django-html",
    },
    "python.terminal.activateEnvInCurrentTerminal": true,
    "djlint.enableLinting": false,
@@ -40,16 +41,22 @@
    },
    "emeraldwalk.runonsave": {
       "commands": [
-         {
-            "match": ".*/templates/.*\\.html$", // only in templates dir
-            "cmd": "djhtml -i ${file}"
-         },
+         // {
+         //    // "match": ".*/templates/.*\\.html$", // only in templates dir
+         //    "cmd": ".\\.venv\\Scripts\\activate"
+         // },
+         // {
+         //    "cmd": "djhtml -i ${file}"
+         // }
+         // {
+         //    "cmd": "echo 1"
+         // }
       ]
    },
    "python.autoComplete.extraPaths": [
-      "~/Documents/projects/Personal/pp5-game-keys/.env/lib/python3.10/site-packages",
+      "F:/New_Github/pp5-game-keys/.venv/Lib/site-packages",
    ],
    "python.analysis.extraPaths": [
-      "~/Documents/projects/Personal/pp5-game-keys/.env/lib/python3.10/site-packages"
+      "F:/New_Github/pp5-game-keys/.venv/Lib/site-packages"
    ],
 }
