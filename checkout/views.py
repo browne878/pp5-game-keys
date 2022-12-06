@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from django.conf import settings
 
 from django.contrib.auth.models import User
@@ -14,6 +15,9 @@ import stripe
 
 def checkout(request):
     cart = request.session.get('cart', {})
+
+    if cart == {}:  # if cart is empty
+        return redirect(reverse('cart'))
 
     if request.method == 'POST':
 
@@ -67,7 +71,6 @@ def checkout(request):
             print(address_form.errors.as_data())
 
     total = cart.total
-    print(total)
     stripe_total = round(total * 100)
     stripe.api_key = settings.STRIPE_SECRET_KEY
     intent = stripe.PaymentIntent.create(

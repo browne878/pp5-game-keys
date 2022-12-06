@@ -14,7 +14,10 @@ def cart_contents(request):
     cart_items = []
     total = 0
     game_count = 0
+
     for game_id, quantity in cart.items():
+        if (game_id == 'total'):
+            continue
         game = get_object_or_404(Game, pk=game_id)
         total += quantity * game.price
         game_count += quantity

@@ -9,7 +9,6 @@ def in_list(value, list):
     """ Checks if a value is in a list """
 
     for item in list:
-        print(value)
         if int(item.get('game_id')) == int(value):
             return True
 

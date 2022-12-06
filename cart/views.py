@@ -1,4 +1,5 @@
 from games.models import Game
+from django.urls import reverse
 from django.shortcuts import (
     render,
     redirect,
@@ -17,13 +18,26 @@ def add_to_cart(request, game_id):
 
     quantity = int(request.POST.get('quantity'))
     redirect_url = request.POST.get('redirect_url')
-    get_object_or_404(Game, pk=game_id)
+    game = get_object_or_404(Game, pk=game_id)
     cart = request.session.get('cart', {})
+
+    print(cart)
+    print('total' in list(cart.keys()))
 
     if game_id in list(cart.keys()):
         cart[game_id] += quantity
+
+        if 'total' in list(cart.keys()):
+            cart['total'] = cart['total'] + (float(game.price) * quantity)
+        else:
+            cart['total'] = float(game.price) * quantity
     else:
         cart[game_id] = cart.get(game_id, quantity)
+
+        if 'total' in list(cart.keys()):
+            cart['total'] = cart['total'] + (float(game.price) * quantity)
+        else:
+            cart['total'] = float(game.price) * quantity
 
     request.session['cart'] = cart
     return redirect(redirect_url)
