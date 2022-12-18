@@ -1,7 +1,7 @@
-const stripe_public_key = $('#id_stripe_public_key').text().slice(1, -1);
-const client_secret = $('#id_client_secret').text().slice(1, -1);
+const stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
+const clientSecret = $('#id_client_secret').text().slice(1, -1);
 
-const stripe = Stripe(stripe_public_key);
+const stripe = Stripe(stripePublicKey);
 
 
 var style = {
@@ -19,7 +19,7 @@ var style = {
     }
 };
 const elements = stripe.elements();
-const card = elements.create('card', { style: style });
+const card = elements.create('card', { style: style, hidePostalCode: true, zipCode: false });
 card.mount('#payment-element');
 
 card.addEventListener('change', function (event) {
@@ -34,3 +34,30 @@ card.addEventListener('change', function (event) {
         $('#error-message').text('');
     }
 });
+
+const form = document.getElementById('payment-form');
+
+form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+
+    stripe.createToken(card).then(function (result) {
+        if (result.error) {
+            console.log('error');
+            console.log(result.error);
+        } else {
+            stripeTokenHandler(result.token);
+        }
+    });
+});
+
+const stripeTokenHandler = (token) => {
+    const hiddenInput = document.createElement('input');
+    hiddenInput.setAttribute('type', 'hidden');
+    hiddenInput.setAttribute('name', 'stripeToken');
+    hiddenInput.setAttribute('value', token.id);
+
+    form.appendChild(hiddenInput);
+
+    // submit form
+    form.submit();
+};

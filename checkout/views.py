@@ -16,10 +16,14 @@ import stripe
 def checkout(request):
     cart = request.session.get('cart', {})
 
+
     if cart == {}:  # if cart is empty
         return redirect(reverse('cart'))
 
     if request.method == 'POST':
+        request.session['form_submitted'] = True
+
+        token = request.POST['stripeToken']
 
         user = get_object_or_404(User, pk=request.user.id)
 
@@ -57,6 +61,8 @@ def checkout(request):
                 order = order_form.save()
 
                 for game_id, quantity in cart.items():
+                    if game_id == 'total':
+                        continue
                     game = get_object_or_404(Game, pk=game_id)
                     order_item = OrderItem(
                         order=order,
@@ -65,23 +71,27 @@ def checkout(request):
                         total=game.price * quantity
                     )
                     order_item.save()
+                    total = cart.get('total')
+                    stripe_total = round(total * 100)
+                    stripe.api_key = settings.STRIPE_SECRET_KEY
+
+                    try:
+                        charge = stripe.Charge.create(
+                            amount=stripe_total,
+                            currency="gbp",
+                            description="Game Keys",
+                            source=token,
+                        )
+                    except stripe.error.CardError:
+                        print('Card declined')
             else:
                 print(order_form.errors.as_data())
         else:
             print(address_form.errors.as_data())
 
-    total = cart.total
-    stripe_total = round(total * 100)
-    stripe.api_key = settings.STRIPE_SECRET_KEY
-    intent = stripe.PaymentIntent.create(
-        amount=stripe_total,
-        currency='gbp'
-    )
-
     template = 'checkout/checkout.html'
     context = {
         'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
-        'client_secret': intent.client_secret,
     }
 
     return render(request, template, context)
