@@ -21,9 +21,6 @@ def add_to_cart(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
     cart = request.session.get('cart', {})
 
-    print(cart)
-    print('total' in list(cart.keys()))
-
     if game_id in list(cart.keys()):
         cart[game_id] += quantity
 
@@ -55,6 +52,16 @@ def modify_cart(request, game_id):
         cart.pop(f"{game_id}")
 
     request.session['cart'] = cart
+
+    # recalculate total
+    total = 0
+    for game_id, quantity in cart.items():
+        if game_id != 'total':
+            game = get_object_or_404(Game, pk=game_id)
+            total += float(game.price) * quantity
+    
+    cart['total'] = total
+
     return redirect(redirect_url)
 
 
@@ -66,7 +73,17 @@ def remove_from_cart(request, game_id):
         cart = request.session.get('cart', {})
         cart.pop(f"{game_id}")
         request.session['cart'] = cart
+        # recalculate total
+        total = 0
+        for game_id, quantity in cart.items():
+            if game_id != 'total':
+                game = get_object_or_404(Game, pk=game_id)
+                total += float(game.price) * quantity
+
+        cart['total'] = total
+            
         return redirect(redirect_url)
+    
 
     except Exception:
         return HttpResponse(status=500)
