@@ -25,6 +25,7 @@ jsbeautifier==1.14.7
 mccabe==0.7.0
 oauthlib==3.2.2
 pathspec==0.10.2
+psycopg2==2.9.5
 pycodestyle==2.10.0
 pycparser==2.21
 pyflakes==3.0.1
