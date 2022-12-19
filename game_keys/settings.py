@@ -113,7 +113,7 @@ WSGI_APPLICATION = 'game_keys.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
-        'default': dj_database_url.parse('postgres://otjxjqmbyrvjuj:f1c4d189c1614228c5fed6c08f5f359cc88c1539cce8b847efa44c2e525eb0eb@ec2-54-228-32-29.eu-west-1.compute.amazonaws.com:5432/d2pte954n3nika')
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
 else:
     DATABASES = {

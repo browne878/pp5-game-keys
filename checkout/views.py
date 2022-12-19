@@ -110,7 +110,6 @@ def checkout_success(request, order_number):
     cart.clear()
     request.session['cart'] = cart
     template = 'checkout/checkout_success.html'
-    print(order)
     context = {
         'order': order,
     }
