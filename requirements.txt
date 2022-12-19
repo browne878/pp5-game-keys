@@ -11,6 +11,7 @@ dj-database-url==1.2.0
 Django==4.1.4
 django-allauth==0.51.0
 django-crispy-forms==1.14.0
+django-storages==1.13.1
 djhtml==1.5.2
 djlint==1.19.7
 EditorConfig==0.12.3
