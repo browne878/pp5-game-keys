@@ -7,7 +7,6 @@ Django==4.1.4
 djhtml==1.5.2
 djlint==1.19.7
 EditorConfig==0.12.3
-env==0.1.0
 flake8==6.0.0
 gunicorn==20.1.0
 html-tag-names==0.1.2
