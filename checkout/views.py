@@ -82,6 +82,13 @@ def checkout(request):
                             description="Game Keys",
                             source=token,
                         )
+
+                        # If charge successful, redirect to success page
+                        if charge.paid:
+                            return redirect(reverse(
+                                'checkout_success',
+                                args=[order.order_number]
+                            ))
                     except stripe.error.CardError:
                         print('Card declined')
             else:
@@ -92,6 +99,20 @@ def checkout(request):
     template = 'checkout/checkout.html'
     context = {
         'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
+    }
+
+    return render(request, template, context)
+
+
+def checkout_success(request, order_number):
+    order = get_object_or_404(Order, order_number=order_number)
+    cart = request.session.get('cart', {})
+    cart.clear()
+    request.session['cart'] = cart
+    template = 'checkout/checkout_success.html'
+    print(order)
+    context = {
+        'order': order,
     }
 
     return render(request, template, context)

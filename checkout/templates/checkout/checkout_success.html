@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_tools %}
+
+{% block content %}
+
+{% include 'components/nav/nav.html' %}
+
+<div>
+    <p>Checkout Success</p>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Return to Home Page</a>
+</div>
+
+{% include 'components/footer/footer.html' %}
+{% endblock content %}
