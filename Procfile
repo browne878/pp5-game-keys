@@ -1,1 +1,1 @@
-web: gunicorn game_keys.wsgi:application
+web: gunicorn game_keys.wsgi
