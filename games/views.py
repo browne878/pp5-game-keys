@@ -75,6 +75,9 @@ def edit_game(request, game_id):
 def delete_game(request, game_id):
     """ Delete a game from the store """
 
+    if not request.user.is_superuser:
+        return redirect('home')
+
     game = get_object_or_404(Game, id=game_id)
     game.delete()
     return redirect('games')
