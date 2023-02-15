@@ -1,6 +1,5 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 
 from .models import Game
 from .forms import GameForm
@@ -32,6 +31,10 @@ def game_detail(request, game_id):
 @ login_required
 def add_game(request):
     """ Add a game to the store """
+
+    if not request.user.is_superuser:
+        return redirect('home')
+
     if request.method == 'POST':
         form = GameForm(request.POST, request.FILES)
         if form.is_valid():
@@ -51,6 +54,9 @@ def add_game(request):
 @ login_required
 def edit_game(request, game_id):
     """ Edit a game in the store """
+
+    if not request.user.is_superuser:
+        return redirect('home')
 
     game = get_object_or_404(Game, id=game_id)
 
