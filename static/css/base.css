@@ -134,7 +134,7 @@
 
 .low-content-container {
     width: 100%;
-    height: 80vh;
+    min-height: 80vh;
 }
 
 /* media queries */
