@@ -14,6 +14,7 @@ def view_cart(request):
     """ A view that renders the cart contents page """
     return render(request, 'cart/cart.html')
 
+@ login_required
 def add_to_cart(request, game_id):
     """ Add a quantity of the specified game to the cart """
 
