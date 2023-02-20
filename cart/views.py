@@ -6,12 +6,13 @@ from django.shortcuts import (
     HttpResponse,
     get_object_or_404,
 )
+from django.contrib.auth.decorators import login_required
 
 
+@ login_required
 def view_cart(request):
     """ A view that renders the cart contents page """
     return render(request, 'cart/cart.html')
-
 
 def add_to_cart(request, game_id):
     """ Add a quantity of the specified game to the cart """
