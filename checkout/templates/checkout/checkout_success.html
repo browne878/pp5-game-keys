@@ -6,7 +6,38 @@
 
 {% include 'components/nav/nav.html' %}
 
-<div>
+<div class="container my-5">
+    <div class="row text-center">
+        <div class="col-12">
+            <h1>Thank you for your order!</h1>
+            <p>
+                Please make a note of your order details below.
+                <br>
+                You will also receive an email confirmation with your order details.
+            </p>
+        </div>
+        <div class="row text-center w-100">
+            <div class="col-6 my-3">
+                <p>Order Number:</p>
+                <p>Address:</p>
+                <p>{{ order.address }}</p>
+            </div>
+            <div class="col-6 my-3">
+                <p>{{ order.order_number }}</p>
+                <p>{{ order.address.address_line_1 }}</p>
+
+                {% if order.address.address_line_2 %}
+                <p>{{ order.address.address_line_2 }}</p>
+                {% endif %}
+
+                <p>{{ order.address.city }}</p>
+                <p>{{ order.address.county }}</p>
+                <p>{{ order.address.country }}</p>
+                <p>{{ order.address.post_code }}</p>
+            </div>
+        </div>
+    </div>
+    <!-- {{ order }} -->
     <p>Checkout Success</p>
     <a href="{% url 'home' %}" class="btn btn-secondary">Return to Home Page</a>
 </div>

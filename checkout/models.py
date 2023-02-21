@@ -13,6 +13,7 @@ class Order(models.Model):
     email = models.EmailField(max_length=254, null=False, blank=False)
     order_total = models.DecimalField(
         max_digits=10, decimal_places=2, null=False)
+    date = models.DateTimeField(auto_now_add=True, blank=True)
 
     def _generate_order_number(self):
         """ Generates a random, unique order number using UUID """

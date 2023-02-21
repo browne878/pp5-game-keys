@@ -85,10 +85,7 @@ def checkout(request):
 
                         # If charge successful, redirect to success page
                         if charge.paid:
-                            return redirect(reverse(
-                                'checkout_success',
-                                args=[order.order_number]
-                            ))
+                            return redirect(reverse('checkout_success', args=[order.order_number]))
                     except stripe.error.CardError:
                         print('Card declined')
             else:
