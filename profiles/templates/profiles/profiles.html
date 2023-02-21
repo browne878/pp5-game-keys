@@ -2,77 +2,77 @@
 {% include 'static' %}
 
 {% block nav %}
-    {% include 'components/nav/nav.html' %}
+{% include 'components/nav/nav.html' %}
 {% endblock %}
 
 {% block content %}
-    {% include 'components/headers/brand_and_search.html' %}
-    {% include 'components/nav/categories.html' %}
+{% include 'components/headers/brand_and_search.html' %}
+{% include 'components/nav/categories.html' %}
 
-    <div class="container">
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2 class="m-3">Your Profile</h2>
+            <p>All of your information is shown below</p>
+        </div>
+    </div>
+    <div>
         <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="m-3">Your Profile</h2>
-                <p>All of your information is shown below</p>
+            <div class="col-12 col-md-6">
+                <div class="card my-2">
+                    <div class="card-body">
+                        {% if address %}
+
+                        <h5 class="card-title text-center">Personal Information</h5>
+                        <p class="card-text">Name: {{ user.first_name }} {{ user.last_name }}</p>
+                        <p class="card-text">Email: {{ user.email }}</p>
+                        <p class="card-text">Phone: {{ address.phone_number }}</p>
+                        <p class="card-text">Address Line 1: {{ address.address_line_1 }}</p>
+                        <p class="card-text">Address Line 2: {{ user.city }}</p>
+                        <p class="card-text">City: {{ address.address_line_2 }}</p>
+                        <p class="card-text">County: {{ address.county }}</p>
+                        <p class="card-text">Country: {{ address.country }}</p>
+                        <p class="card-text">Post Code: {{ address.post_code }}</p>
+                        {% else %}
+                        <h5 class="card-title text-center">Personal Information</h5>
+                        <p class="card-text">
+                            You do not have any saved information. You can save your information by checking the box
+                            when making an order.
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card my-2">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Account Information</h5>
+                        <p class="card-text">Username: {{ user.username }}</p>
+                        <p class="card-text">Password: ********</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div>
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    <div class="card my-2">
-                        <div class="card-body">
-                            {% if address %}
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="card my-2">
+                    <div class="card-body">
 
-                                <h5 class="card-title text-center">Personal Information</h5>
-                                <p class="card-text">Name: {{ user.first_name }} {{ user.last_name }}</p>
-                                <p class="card-text">Email: {{ user.email }}</p>
-                                <p class="card-text">Phone: {{ address.phone_number }}</p>
-                                <p class="card-text">Address Line 1: {{ address.address_line_1 }}</p>
-                                <p class="card-text">Address Line 2: {{ user.city }}</p>
-                                <p class="card-text">City: {{ address.address_line_2 }}</p>
-                                <p class="card-text">County: {{ address.county }}</p>
-                                <p class="card-text">Country: {{ address.country }}</p>
-                                <p class="card-text">Post Code: {{ address.post_code }}</p>
-                            {% else %}
-                                <h5 class="card-title text-center">Personal Information</h5>
-                                <p class="card-text">
-                                    You do not have any saved information. You can save your information by checking the box
-                                    when making an order.
-                                </p>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="card my-2">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Account Information</h5>
-                            <p class="card-text">Username: {{ user.username }}</p>
-                            <p class="card-text">Password: ********</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    <div class="card my-2">
-                        <div class="card-body">
+                        {% if orders %}
+                        {% for order in orders %}
+                        {{ order.id}}
+                        {% endfor %}
+                        {% else %}
+                        <h5 class="card-title text-center">Order History</h5>
+                        <p class="card-text">You have not made any orders yet.</p>
+                        {% endif %}
 
-                            {% if orders %}
-                                {% for order in orders %}
-                                    {{ order.id}}
-                                {% endfor %}
-                            {% else %}
-                                <h5 class="card-title text-center">Order History</h5>
-                                <p class="card-text">You have not made any orders yet.</p>
-                            {% endif %}
-
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    {% include 'components/footer/footer.html' %}
+{% include 'components/footer/footer.html' %}
 {% endblock %}
