@@ -58,9 +58,39 @@
                 <div class="card-body">
 
                     {% if orders %}
-                    {% for order in orders %}
-                    {{ order.id }}
-                    {% endfor %}
+                    <div class="container w-100">
+
+                        <div class="row w-100 mb-3">
+                            <div class="col-4">
+                                Order Number
+                            </div>
+                            <div class="col-4">
+                                Order Date
+                            </div>
+                            <div class="col-4">
+                                Order Total
+                            </div>
+                        </div>
+
+                        <div class="list-group">
+                            {% for order in orders %}
+                            <a href="" class="list-group-item list-group-item-action">
+                                <div class="row w-100">
+                                    <div class="col-4">
+                                        <p>{{ order.order_number }}</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>{{ order.date }}</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>£{{ order.order_total }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </div>
+
+                    </div>
                     {% else %}
                     <h5 class="card-title text-center">Order History</h5>
                     <p class="card-text">You have not made any orders yet.</p>
