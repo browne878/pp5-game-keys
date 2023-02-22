@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.conf import settings
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 from django.contrib.auth.models import User
 from profiles.models import Address
@@ -86,6 +89,16 @@ def checkout(request):
 
                         # If charge successful, redirect to success page
                         if charge.paid:
+                            html_message = render_to_string('email/order_confirmation.html', {'order': order})
+                            
+                            send_mail(
+                                f'Order Confirmation - {order.order_number}',
+                                strip_tags(html_message),
+                                settings.DEFAULT_FROM_EMAIL,
+                                [order.email],
+                                html_message=html_message
+                            )
+
                             return redirect(reverse('checkout_success', args=[order.order_number]))
                     except stripe.error.CardError:
                         print('Card declined')
