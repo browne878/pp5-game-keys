@@ -3,6 +3,7 @@ from django.db import models
 
 from profiles.models import Address
 from games.models import Game
+from django.contrib.auth.models import User
 
 
 class Order(models.Model):
@@ -14,6 +15,7 @@ class Order(models.Model):
     order_total = models.DecimalField(
         max_digits=10, decimal_places=2, null=False)
     date = models.DateTimeField(auto_now_add=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     def _generate_order_number(self):
         """ Generates a random, unique order number using UUID """

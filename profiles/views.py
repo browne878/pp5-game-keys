@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 
 from django.contrib.auth.models import User
 from .models import Address
+from checkout.models import Order
 
 
 def profile(request):
@@ -11,10 +12,12 @@ def profile(request):
 
         user = get_object_or_404(User, pk=request.user.id)
         address = Address.objects.filter(user=user)
+        orders = Order.objects.filter(user=user)
 
         if address:
             context = {
-                'address': address[0]
+                'address': address[0],
+                'orders': orders,
             }
         else:
             context = {}
