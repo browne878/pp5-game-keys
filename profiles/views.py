@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Address
 from checkout.models import Order
 
 
+@login_required
 def profile(request):
     """ Show the user's profile """
 
@@ -26,3 +28,17 @@ def profile(request):
         return redirect(reverse('account_login'))
 
     return render(request, 'profiles/profiles.html', context)
+
+
+@login_required
+def order_details(request, order_number):
+    """ Show the user's order details """
+
+    order = get_object_or_404(Order, order_number=order_number)
+
+    context = {
+        'order': order,
+        'address': order.address
+    }
+
+    return render(request, 'profiles/order_details.html', context)
