@@ -46,6 +46,7 @@
             <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
                 <h3>Details</h3>
+                <input type="hidden" name="user">
                 <input type="text" name="full-name" id="full-name" placeholder="Full Name*" class="w-75 my-2"
                     value="{{ user.first_name }} {{ user.last_name }}" required>
                 <input type="text" name="email" id="email" placeholder="Email*" value="{{ user.email }}"
