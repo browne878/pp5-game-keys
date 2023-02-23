@@ -33,6 +33,7 @@
     background: url(/media/fps_soldier.jpg) no-repeat center center/cover;
     height: 80vh;
     margin: auto;
+    position: relative;
 }
 
 .hero-text {
