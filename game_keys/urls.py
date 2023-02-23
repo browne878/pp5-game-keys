@@ -28,6 +28,7 @@ urlpatterns = [
     path('profiles/', include('profiles.urls')),
     path('cart/', include('cart.urls')),
     path('checkout/', include('checkout.urls')),
+    path('newsletter/', include('newsletter.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'game_keys.views.page_not_found'

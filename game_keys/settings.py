@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'profiles',
     'cart',
     'checkout',
-    'storages'
+    'storages',
+    'newsletter'
 ]
 
 MIDDLEWARE = [
