@@ -2,19 +2,27 @@
 {% load static %}
 
 {% block nav %}
-    {% include 'components/nav/nav.html' %}
+{% include 'components/nav/nav.html' %}
 {% endblock %}
 
 
 {% block content %}
-    {% include 'components/headers/brand_and_search.html' %}
+{% include 'components/headers/brand_and_search.html' %}
 
-    <div class="hero">
-        <div class="hero-text bg-light">
-            <h2>Browse our range of <strong>Cheap Games</strong> by clicking the button below</h2>
-            <a class="btn btn-secondary" href="{% url 'games' %}" role="button">Browse</a>
-        </div>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Newsletter</h1>
+        <p class="lead">Sign up for our newsletter and get our exclusive offers!</p>
+        <button class="btn btn-primary" type="button" href="{% url 'newsletter' %}">Sign Up Now</button>
     </div>
+</div>
 
-    {% include 'components/footer/footer.html' %}
+<div class="hero">
+    <div class="hero-text bg-light">
+        <h2>Browse our range of <strong>Cheap Games</strong> by clicking the button below</h2>
+        <a class="btn btn-secondary" href="{% url 'games' %}" role="button">Browse</a>
+    </div>
+</div>
+
+{% include 'components/footer/footer.html' %}
 {% endblock %}
