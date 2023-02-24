@@ -19,6 +19,13 @@
 
         <form action="{% url 'newsletter' %}" method="post">
             {% csrf_token %}
+            {% if errors %}
+            <div class="row">
+                <div class="col-12 text-center w-100">
+                    <p class="text-danger">{{ errors }}</p>
+                </div>
+            </div>
+            {% endif %}
             <div class="row">
                 <div class="col-12 text-center w-100">
                     {% if user.first_name and user.last_name %}

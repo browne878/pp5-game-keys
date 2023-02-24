@@ -13,8 +13,10 @@ def newsletter(request):
             print('form saved')
             return render(request, 'newsletter/newsletter.html')
         else:
-            print(form.errors)
-            return render(request, 'newsletter/newsletter.html')
+            context = {
+                'errors': form.errors.as_text().split('*')[-1]
+            }
+            return render(request, 'newsletter/newsletter.html', context)
         
     
     return render(request, 'newsletter/newsletter.html')
