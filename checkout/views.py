@@ -17,6 +17,8 @@ import stripe
 
 
 def checkout(request):
+    """ A view to handle the checkout process """
+    
     cart = request.session.get('cart', {})
 
 
@@ -116,6 +118,8 @@ def checkout(request):
 
 
 def checkout_success(request, order_number):
+    """ A view to handle the checkout success page """
+    
     order = get_object_or_404(Order, order_number=order_number)
     cart = request.session.get('cart', {})
     cart.clear()

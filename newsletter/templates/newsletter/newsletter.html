@@ -21,8 +21,13 @@
             {% csrf_token %}
             <div class="row">
                 <div class="col-12 text-center w-100">
-                    <input type="text" name="full-name" id="full-name" placeholder="Full Name*" class="w-75 my-2"
+                    {% if user.first_name and user.last_name %}
+                    <input type="text" name="name" id="full-name" placeholder="Full Name*" class="w-75 my-2"
                         value="{{ user.first_name }} {{ user.last_name }}" required>
+                    {% else %}
+                    <input type="text" name="full-name" id="full-name" placeholder="Full Name*" class="w-75 my-2"
+                        required>
+                    {% endif %}
                     <input type="text" name="email" id="email" placeholder="Email*" value="{{ user.email }}"
                         class="w-75 my-2" required>
                     <input type="submit" value="Sign Up" class="btn btn-primary w-75 my-2">
