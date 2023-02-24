@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 
 from .forms import SubscriptionForm
+from .models import Subscription
 
 # Create your views here.
 def newsletter(request):
@@ -10,13 +12,16 @@ def newsletter(request):
         form = SubscriptionForm(request.POST)
         if form.is_valid():
             form.save()
-            print('form saved')
-            return render(request, 'newsletter/newsletter.html')
+            return redirect(reverse('subscribed'))
         else:
             context = {
                 'errors': form.errors.as_text().split('*')[-1]
             }
             return render(request, 'newsletter/newsletter.html', context)
-        
     
     return render(request, 'newsletter/newsletter.html')
+
+
+def subscribed(request):
+    """ A view to show the subscribed page """
+    return render(request, 'newsletter/subscribed.html')
