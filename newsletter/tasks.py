@@ -16,8 +16,6 @@ def send_exclusives():
     
     games = get_random_games()
     
-    print(games)
-    
     for subscription in subscriptions:
         name = subscription.name
         email = subscription.email
