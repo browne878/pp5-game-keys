@@ -1,3 +1,10 @@
 from django.test import TestCase
 
-# Create your tests here.
+class NewsletterViewsTestCase(TestCase):
+
+    def test_newsletter_signup(self):
+        """ Tests the newsletter signup page loads correctly """
+        page = self.client.get("/newsletter/")
+        self.assertEqual(page.status_code, 200)
+        self.assertTemplateUsed(page, "newsletter/newsletter.html")
+
