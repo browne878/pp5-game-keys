@@ -44,11 +44,15 @@
                             </div>
                         {% endif %}
                         <div class="card-body">
-                            <h5 class="card-title">{{ game.title }}</h5>
+                            <h5 class="card-title">
+                                <strong>{{ game.title }}</strong>
+                            </h5>
                             <p class="card-text">{{ game.description|truncatechars:100 }}</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">{{ game.publisher }}</li>
+                            <li class="list-group-item">
+                                <strong>{{ game.publisher }}</strong>
+                            </li>
                             <li class="list-group-item">£{{ game.price }}</li>
                             <li class="list-group-item">
                                 {% with '1 2 3 4 5' as ratingArray %}
