@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from asgiref.sync import sync_to_async
 
 
 class NewsletterConfig(AppConfig):
@@ -7,4 +8,4 @@ class NewsletterConfig(AppConfig):
     
     def ready(self):
         from . import tasks
-        tasks.interval_schedule()
+        sync_to_async(tasks.interval_schedule)()
