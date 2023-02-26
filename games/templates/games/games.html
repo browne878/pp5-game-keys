@@ -2,95 +2,99 @@
 {% load static %}
 
 {% block nav %}
-{% include 'components/nav/nav.html' %}
+    {% include 'components/nav/nav.html' %}
 {% endblock %}
 
 {% block content %}
-{% include 'components/headers/brand_and_search.html' %}
-{% include 'components/nav/categories.html' %}
+    {% include 'components/headers/brand_and_search.html' %}
+    {% include 'components/nav/categories.html' %}
 
-<div class="container">
-    <div class="row">
+    <div class="container">
+        <div class="row">
 
-        <!-- Game Cards -->
-        {% for game in games %}
-        <div class="game-card-container col-12 col-md-6 col-xl-4">
-            {% if request.user.is_superuser %}
-            <a href="{% url 'delete_game' game.id %}">
-                <button type="button" class="btn btn-close" aria-label="Close">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-            </a>
-            <a href="{% url 'edit_game' game.id %}">
-                <button type="button" class="btn btn-edit" aria-label="Edit">
-                    <i class="fas fa-pencil"></i>
-                </button>
-            </a>
-            {% endif %}
-            <div class="card text-center game-card" style="width: 18rem;">
-                {% if game.image %}
-                <div class="card-image-container">
-                    <a href="{% url 'game_detail' game.id %}">
-                        <img src="{{ game.image.url }}" class="card-img-top" alt="{{ game.title }} image">
-                    </a>
-                </div>
-                {% else %}
-                <div class="card-image-container">
-                    <img src="{{ MEDIA_URL }}noimage.jpg" class="card-img-top" alt="{{ game.title }} image">
-                </div>
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title">{{ game.title }}</h5>
-                    <p class="card-text">
-                        {{ game.description|truncatechars:100 }}
-                    </p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{ game.publisher }}</li>
-                    <li class="list-group-item">£{{ game.price }}</li>
-                    <li class="list-group-item">
-                        {% with '1 2 3 4 5' as ratingArray %}
-
-                        {% for i in ratingArray.split %}
-                        {% if game.rating >= i|add:"0" %}
-                        <i class="fa-solid fa-star"></i>
-                        {% else %}
-                        <i class="fa-regular fa-star"></i>
-                        {% endif %}
-                        {% endfor %}
-
-                        {% endwith %}
-                    </li>
-                </ul>
-                <div class="card-body">
-                    <a href="{% url 'game_detail' game.id %}" class="card-link">More Info</a>
-
-                    {% if game.status == "1" %}
-                    <form class="add-to-cart-form" action="{% url 'add_to_cart' game.id %}" method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="game_id" value="{{ game.id }}">
-                        <input type="hidden" name="quantity" value="1">
-                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                        <button class="btn card-submit" type="submit">Add to Cart</button>
-                    </form>
-                    {% elif game.status == "2" %}
-                    <div>
-                        <button class="btn disabled">Back-Ordered</button>
-                    </div>
-                    {% elif game.status == "3" %}
-                    <div>
-                        <button class="btn disabled">Out-Of-Stock</button>
-                    </div>
+            <!-- Game Cards -->
+            {% for game in games %}
+                <div class="game-card-container col-12 col-md-6 col-xl-4">
+                    {% if request.user.is_superuser %}
+                        <a href="{% url 'delete_game' game.id %}">
+                            <button type="button" class="btn btn-close" aria-label="Close">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </a>
+                        <a href="{% url 'edit_game' game.id %}">
+                            <button type="button" class="btn btn-edit" aria-label="Edit">
+                                <i class="fas fa-pencil"></i>
+                            </button>
+                        </a>
                     {% endif %}
+                    <div class="card text-center game-card" style="width: 18rem;">
+                        {% if game.image %}
+                            <div class="card-image-container">
+                                <a href="{% url 'game_detail' game.id %}">
+                                    <img src="{{ game.image.url }}"
+                                         class="card-img-top"
+                                         alt="{{ game.title }} image">
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="card-image-container">
+                                <img src="{{ MEDIA_URL }}noimage.jpg"
+                                     class="card-img-top"
+                                     alt="{{ game.title }} image">
+                            </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ game.title }}</h5>
+                            <p class="card-text">{{ game.description|truncatechars:100 }}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{ game.publisher }}</li>
+                            <li class="list-group-item">£{{ game.price }}</li>
+                            <li class="list-group-item">
+                                {% with '1 2 3 4 5' as ratingArray %}
+
+                                    {% for i in ratingArray.split %}
+                                        {% if game.rating >= i|add:"0" %}
+                                            <i class="fa-solid fa-star"></i>
+                                        {% else %}
+                                            <i class="fa-regular fa-star"></i>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                {% endwith %}
+                            </li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="{% url 'game_detail' game.id %}" class="card-link">More Info</a>
+
+                            {% if game.status == "1" %}
+                                <form class="add-to-cart-form"
+                                      action="{% url 'add_to_cart' game.id %}"
+                                      method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="game_id" value="{{ game.id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                    <button class="btn card-submit" type="submit">Add to Cart</button>
+                                </form>
+                            {% elif game.status == "2" %}
+                                <div>
+                                    <button class="btn disabled">Back-Ordered</button>
+                                </div>
+                            {% elif game.status == "3" %}
+                                <div>
+                                    <button class="btn disabled">Out-Of-Stock</button>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+            {% endfor %}
+
         </div>
-
-        {% endfor %}
-
     </div>
-</div>
 
 
-{% include 'components/footer/footer.html' %}
+    {% include 'components/footer/footer.html' %}
 {% endblock %}

@@ -4,30 +4,30 @@
 
 
 {% block nav %}
-{% include 'components/nav/nav.html' %}
+    {% include 'components/nav/nav.html' %}
 {% endblock %}
 
 
 {% block content %}
 
-<div id="not-found-container" class="text-center ">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1>Page Not found</h1>
+    <div id="not-found-container" class="text-center ">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Page Not found</h1>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <p>
-                    Looks like we cannot find the page you are looking for.
-                    <br>
-                    While we are looking, please browse our site.
-                </p>
+            <div class="row">
+                <div class="col-12">
+                    <p>
+                        Looks like we cannot find the page you are looking for.
+                        <br>
+                        While we are looking, please browse our site.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-{% include 'components/footer/footer.html' %}
+    {% include 'components/footer/footer.html' %}
 {% endblock content %}

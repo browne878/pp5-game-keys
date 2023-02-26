@@ -4,35 +4,35 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="text-center w-100">
-        <div class="col-12">
-            <h1>Hey {{name}}, we have an exclusive offer for you!</h1>
+    <div class="container">
+        <div class="text-center w-100">
+            <div class="col-12">
+                <h1>Hey {{ name }}, we have an exclusive offer for you!</h1>
+            </div>
         </div>
+
+        {% for game in games %}
+
+            <div class="row text-center mt-3">
+                <div class="col-12">
+                    <h2>{{ game.title }}</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <img src="{{ game.image.url }}" alt="{{ game.name }}" class="img-fluid">
+                </div>
+                <div class="col-6">
+                    <p>{{ game.description }}</p>
+                    <p>Price: {{ game.price }}</p>
+                    <p>Discount: 10%</p>
+                    <p>Discounted Price: {{ game.price|discount:0.9 }}</p>
+                </div>
+            </div>
+
+            <hr>
+
+        {% endfor %}
     </div>
-
-    {% for game in games %}
-
-    <div class="row text-center mt-3">
-        <div class="col-12">
-            <h2>{{game.title}}</h2>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-6">
-            <img src="{{game.image.url}}" alt="{{game.name}}" class="img-fluid">
-        </div>
-        <div class="col-6">
-            <p>{{game.description}}</p>
-            <p>Price: {{game.price}}</p>
-            <p>Discount: 10%</p>
-            <p>Discounted Price: {{ game.price|discount:0.9 }}</p>
-        </div>
-    </div>
-
-    <hr>
-
-    {% endfor %}
-</div>
 {% endblock %}

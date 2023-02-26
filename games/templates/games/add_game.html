@@ -23,7 +23,10 @@
 
         <div class="row">
             <div class="col-12">
-                <form method="POST" action="{% url 'add_game' %}" class="form mb-2 game-form" enctype="multipart/form-data">
+                <form method="POST"
+                      action="{% url 'add_game' %}"
+                      class="form mb-2 game-form"
+                      enctype="multipart/form-data">
                     {% csrf_token %}
                     {% for field in form %}
                         {% if field.name != 'image' %}
@@ -31,7 +34,12 @@
                                 <div id="div_id_year" class="control-group">
                                     <label for="id_year" class="control_label requiredField">Year</label>
                                     <div class="controls">
-                                        <input type="number" name="year" min="1970" max="2022" class="numberinput" id="id_year">
+                                        <input type="number"
+                                               name="year"
+                                               min="1970"
+                                               max="2022"
+                                               class="numberinput"
+                                               id="id_year">
                                     </div>
                                 </div>
                             {% else %}
