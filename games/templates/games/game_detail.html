@@ -23,7 +23,9 @@
             </ol>
         </nav>
 
-        <h2 class="m-3">{{ game.title }}</h2>
+        <h2 class="m-3">
+            <strong>{{ game.title }}</strong>
+        </h2>
 
         <div class="image-container">
             {% if game.image %}
@@ -146,11 +148,15 @@
                 </ul>
                 <ul class="list-group list-group-horizontal details-list">
                     <li class="list-group-item">Developer</li>
-                    <li class="list-group-item">{{ game.developer }}</li>
+                    <li class="list-group-item">
+                        <strong>{{ game.developer }}</strong>
+                    </li>
                 </ul>
                 <ul class="list-group list-group-horizontal details-list">
                     <li class="list-group-item">Publisher</li>
-                    <li class="list-group-item">{{ game.publisher }}</li>
+                    <li class="list-group-item">
+                        <strong>{{ game.publisher }}</strong>
+                    </li>
                 </ul>
             </div>
         </div>
