@@ -37,9 +37,46 @@ My aim for Game Keys is to bring low cost games to everyone. I want to make them
 
 ## **Business Model**
 
+Game Keys is a B2C business model. This means that the business is selling to consumers. By selling directly to customers I can keep prices
+low and make games more accessible to everyone.
+
+I have created a facebook page for the business. This can be found [here](/readme/images/social_mocks/facebook-mock.png).
+
+To expand the business, I would focus on the social media aspect. I would create a facebook page and a twitter account. I would then use these
+to promote the business and drive traffic to the website.
+
+I would also create a discord server. After research, I have discovered that discord is a popular platform for gamers. I would use this to
+promote the business and drive traffic to the website.
+
+As business grows, I would then expand to advertising via content creators. Content creators entire audience are games so would maximise
+the potential business driven to the website from that investment.
+
+It is also important for the business to take into consideration GDPR. This is because the business is collecting personal information from
+users. To stay within the bounds of GDPR, I will ensure on required information is collected and stored. I will also ensure that users can
+request to have their information deleted. This will be done by creating a contact form on the website.
+
 ## **Planning**
 
+All user stories can be found documented in the issues section of the repository.
+
+- Wireframes
+
+I have created wireframes for every page of the website. There can be found [here](/readme/images/wireframes/)
+
+I have kept the designs relatively simple to allow for changes in the development process. By doing this I was able to make slight changes
+to the design without impacting to development timeline.
+
 ## **Features**
+
+- Full CRUD functionality for games.
+- Require superuser permissions to create, edit and delete games.
+- Newsletter signup.
+- Newsletter signup confirmation email.
+- Newsletter emails sent every 5 minutes.
+- Order confirmation emails sent when an order is made.
+- Order history.
+- Custom 404 page.
+- Responsive design.
 
 ## **Models**
 
