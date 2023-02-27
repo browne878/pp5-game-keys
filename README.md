@@ -172,8 +172,11 @@ For emails I tested the following:
 - Making and order and receiving an order confirmation email.
 
 Code Validation:
-All python code has been run through the [CI Linting Tool](https://pep8ci.herokuapp.com/).
-All css code has been run through the [W3C CSS Validation Tool](https://jigsaw.w3.org/css-validator/).
+All python code has been run through the [CI Linting Tool](https://pep8ci.herokuapp.com/). The results can be found [here](/readme/images/code_validation/python/).
+
+All css code has been run through the [W3C CSS Validation Tool](https://jigsaw.w3.org/css-validator/). The results can be found [here](/readme/images/code_validation/css/Screenshot%202023-02-27%20at%2018.21.46.png).
+
+All html code has been run through the [W3C HTML Validation Tool](https://validator.w3.org/). The results can be found [here](/readme/images/code_validation/html/).
 
 I have been unable to validate the HTML code as the website uses Jinja templating. This means that the HTML code is not valid.
 
