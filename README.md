@@ -73,13 +73,13 @@ instructions below.
 5. After this, navigate to the directory you would like to clone the repository too with the following command.
 
  ```
-cd <clone location>
+cd clone location
  ```
 
 6. Then, run the following command.
 
  ```
-git clone <URL>
+git clone URL
  ```
 
 You have now forked and cloned the repository.
@@ -143,28 +143,92 @@ a [Heroku](https://www.heroku.com/) account.
 8. Also, under the main branch is selected in the `Manual deploy` section.
 9. Next, at the top of the page, navigate to the settings page.
 10. After this, go to the resources tab on heroku and search for `Heroku Postgres` under the add-ons tab.
-11. Then, you will need to go
-    to [Cloudinary](https://cloudinary.com/console/c-e41e529a42f687f55f451d5505dfd8/getting-started) and sign up.
-12. Once you have signed up, go to the dashboard and copy the `API Environment variable`.
-13. After this, under the `Config Vars` section, click the `Reveal Config Vars` button and enter the
+11. Then, you will need to go to [AWS](https://aws.amazon.com/) and sign up.
+12. Once you have signed up, go to the s3 service and create a new bucket.
+13. Select the region you want to use and enter a unique name for your bucket.
+14. Enable ACLs and set Object Owner to Bucket Owner and click create.
+15. Select the bucket you just created and click `Properties`.
+16. Scroll down to the `Static website hosting` section and click `Edit`.
+17. Then, enable `Use this bucket to host a website` and enter `index.html` for the index document and
+    `error.html` for the error document.
+18. Next, click `Save`.
+19. Then, go to the `Permissions` tab, scroll down to CORS, and click `Edit`.
+20. Then, add the following to the CORS configuration.
+
+ ```
+[
+    {
+        "AllowedHeaders": [
+            "Authorization"
+        ],
+        "AllowedMethods": [
+            "GET"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": []
+    }
+]
+ ```
+
+21. Then, click `Save`.
+22. Next, go to the `Access Control List` tab and click `Edit`.
+23. After that, tick `Everyone (public access)` for Objects and click `Save`.
+24. You have now set up the S3 bucket. The next step is to set up the IAM user. To do so, go to the
+    `IAM` service and click `User` on the left.
+25. Then, click `Add user`.
+26. Next, enter a name for the user and select `Programmatic access` and click `Next: Permissions`.
+27. Then, click `Attach existing policies directly` and choose to enter a policy.
+28. After this, copy and paste the following policy into the policy editor.
+
+ ```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:*",
+                "s3-object-lambda:*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::<project-name>/*",
+                "arn:aws:s3:::<project-name>/*"
+            ]
+        }
+    ]
+}
+```
+
+29. Replace `<project-name>` with the name of your project.
+30. Then, click `Review policy`.
+31. After this, enter a name for the policy and click `Create policy`.
+32. Next, search for the policy you just created and tick the checkbox next to it.
+33. Then, click `Next: Tags`.
+34. After this, click `Next: Review`.
+35. Then, click `Create user`.
+36. After this, you will be able to download the CSV file. Download this file and keep it safe.
+38. Once this is done, you can add the AWS keys to the config vars in Heroku.
+40. After this, under the `Config Vars` section, click the `Reveal Config Vars` button and enter the
     following:
-    - `SECRET_KEY` : `Generate this yourself but make it random so it is secure`.
-    - `AWS_ACCESS_KEY_ID`:
-    - `AWS_SECRET_ACCESS_KEY`:
+    - `SECRET_KEY` : Generate this yourself but make it random so it is secure.
+    - `AWS_ACCESS_KEY_ID`: AWS access key from your AWS account
+    - `AWS_SECRET_ACCESS_KEY`: AWS secret access key from your AWS account
     - `DEBUG`: This can be added if you want to develop the application further. It will provide debug messages
         in the console. Set this to `True` if you want to use it.
-    - `EMAIL_HOST_PASS`:
-    - `EMAIL_HOST_USER`:
-    - `STRIPE_PUBLIC_KEY`:
-    - `STRIPE_SECRET_KEY`:
-    - `USE_AWS`:
-14. Then, in the section below (`Buildpacks`), click `Add buildpack` and select python.
-15. Repeat the previous step, but this time, select NodeJS.
-16. Once this is done, ensure that the python build-pack is at the top of the list. (You can drag them to move them).
-17. Then, at the top of the page, navigate back to the deployment section.
-18. Finally, you can scroll to the bottom of the page and click the `Deploy Branch` button under the `Manual deploy`
+    - `EMAIL_HOST_PASS`: Password of the email account
+    - `EMAIL_HOST_USER`: Email address of the email account
+    - `STRIPE_PUBLIC_KEY`: Stripe public key from your account
+    - `STRIPE_SECRET_KEY`: Stripe secret key from your account
+    - `USE_AWS`: True
+41. Then, in the section below (`Buildpacks`), click `Add buildpack` and select python.
+42. Repeat the previous step, but this time, select NodeJS.
+43. Once this is done, ensure that the python build-pack is at the top of the list. (You can drag them to move them).
+44. Then, at the top of the page, navigate back to the deployment section.
+45. Finally, you can scroll to the bottom of the page and click the `Deploy Branch` button under the `Manual deploy`
     section.
-19. Once the deployment is complete, you can click the `Open app` button at the top right of the page. This will open
+46. Once the deployment is complete, you can click the `Open app` button at the top right of the page. This will open
     the deployed app in a new tab.
 
 ## **Credits**
