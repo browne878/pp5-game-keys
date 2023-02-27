@@ -164,6 +164,8 @@ For the game creation pages, I tested the following:
 - Clicking the edit button above the game on the /games page and editing the game.
 - Clicking the delete button above the game on the /games page and deleting the game.
 
+Screenshots of these manual tests can be found [here](/readme/images/manual_testing/games/).
+
 For emails I tested the following:
 
 - Signing up to the newsletter.
