@@ -120,6 +120,9 @@ This model has a one to one relationship with the user model. This is because an
 In the future, I would like to move administrative function to its own admin portal. This would simplify administrative tasks on the website.
 I would also add the ability to trigger newsletters manually as well as introduce new offers into the newsletters.
 
+I would also set up the newsletter to be sent automatically at a set time. This would allow for the newsletter to be sent at a time when users
+are most likely to be online.
+
 ## **Testing**
 
 ### **Automated Testing**
@@ -138,6 +141,8 @@ This function checks both the response code and the template used. I then ran th
 
 I created a test to check if the page was loading correctly. I did this by creating a test class and then creating a test function.
 This function checks both the response code and the template used. I then ran the test and it passed.
+
+You can see the results of these tests [here](/readme/images/code_validation/automated_tests/automated-test-result.png)
 
 ### **Manual Testing**
 
