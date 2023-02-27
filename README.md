@@ -68,15 +68,17 @@ to the design without impacting to development timeline.
 
 ## **Features**
 
-- Full CRUD functionality for games.
-- Require superuser permissions to create, edit and delete games.
-- Newsletter signup.
-- Newsletter signup confirmation email.
-- Newsletter emails sent every 5 minutes.
-- Order confirmation emails sent when an order is made.
-- Order history.
-- Custom 404 page.
-- Responsive design.
+- Navbar
+
+![Navbar](./readme/images/features/navbar.png)
+
+A simple navbar that is present on most pages. The game keys logo is a link back to the home page. It also has direct access to the cart and profile via the buttons.
+
+- Footer
+
+![Footer](./readme/images/features/footer.png)
+
+A simple footer that is present on all pages. It contains links to the social media pages and has copyright information.
 
 ## **Models**
 
