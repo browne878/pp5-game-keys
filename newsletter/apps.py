@@ -8,4 +8,4 @@ class NewsletterConfig(AppConfig):
     def ready(self):
         from . import tasks
 
-        tasks.interval_schedule
+        tasks.interval_schedule()
