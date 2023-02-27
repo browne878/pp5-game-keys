@@ -3,181 +3,162 @@
 {% load cart_tools %}
 
 {% block nav %}
-    {% include 'components/nav/nav.html' %}
+{% include 'components/nav/nav.html' %}
 {% endblock %}
 
 {% block content %}
-    {% include 'components/headers/brand_and_search.html' %}
-    {% include 'components/nav/categories.html' %}
+{% include 'components/headers/brand_and_search.html' %}
+{% include 'components/nav/categories.html' %}
 
-    <div class="text-center my-5">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="{% url 'home' %}">Home</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{% url 'games' %}">Games</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">{{ game.title }}</li>
-            </ol>
-        </nav>
+<div class="text-center my-5">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="{% url 'games' %}">Games</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">{{ game.title }}</li>
+        </ol>
+    </nav>
 
-        <h2 class="m-3">
-            <strong>{{ game.title }}</strong>
-        </h2>
+    <h2 class="m-3">
+        <strong>{{ game.title }}</strong>
+    </h2>
 
-        <div class="image-container">
-            {% if game.image %}
-                <img src="{{ game.image.url }}" alt="{{ game.title }} image" class="my-3" />
-            {% else %}
-                <img src="{{ MEDIA_URL }}noimage.jpg"
-                     alt="{{ game.title }} image"
-                     class="my-3"/>
+    <div class="image-container">
+        {% if game.image %}
+        <img src="{{ game.image.url }}" alt="{{ game.title }} image" class="my-3">
+        {% else %}
+        <img src="{{ MEDIA_URL }}noimage.jpg" alt="{{ game.title }} image" class="my-3">
+        {% endif %}
+    </div>
+
+    <h5>£{{ game.price }}</h5>
+
+    <div>
+        <div class="btn-group" role="group" aria-label="Item Count Controls">
+
+            {% if cart_items|length > 0 %}
+            {% for item in cart_items %}
+            {% if item.game_id|add:0 == game.id|add:0 %}
+            <button class="btn btn-secondary decrement-quantity" type="button">
+                <i class="fas fa-minus"></i>
+            </button>
             {% endif %}
-        </div>
+            {% endfor %}
+            {% endif %}
 
-        <h5>£{{ game.price }}</h5>
-
-        <div>
-            <div class="btn-group" role="group" aria-label="Item Count Controls">
-
-                {% if cart_items|length > 0 %}
-                    {% for item in cart_items %}
-                        {% if item.game_id|add:0 == game.id|add:0 %}
-                            <button class="btn btn-secondary decrement-quantity" type="button">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-
-                {% if game.status == '1' %}
-                    {% if game.id|in_list:cart_items %}
-                        <form class="add-to-cart-form game-quantity-form"
-                              action="{% url 'modify_cart' game.id %}"
-                              method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="game_id" value="{{ game.id }}">
-                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                            <input class="text-center game-quantity"
-                                   type="number"
-                                   name="quantity"
-                                   min="0"
-                                   max="5"
-                                   value="{{ game.id|item_quantity:cart_items }}">
-                        </form>
-                    {% else %}
-                        <form class="add-to-cart-form"
-                              action="{% url 'add_to_cart' game.id %}"
-                              method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="game_id" value="{{ game.id }}">
-                            <input type="hidden" name="quantity" value="1">
-                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                            <button class="btn btn-secondary" type="submit">Add to Cart</button>
-                        </form>
-                    {% endif %}
-                {% elif game.status == '2' %}
-                    <button class="btn btn-secondary disabled">Back Ordered</button>
-                {% elif game.status == '3' %}
-                    <button class="btn btn-secondary disabled">Out of Stock</button>
-                {% endif %}
+            {% if game.status == '1' %}
+            {% if game.id|in_list:cart_items %}
+            <form class="add-to-cart-form game-quantity-form" action="{% url 'modify_cart' game.id %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="game_id" value="{{ game.id }}">
+                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                <input class="text-center game-quantity" type="number" name="quantity" min="0" max="5"
+                    value="{{ game.id|item_quantity:cart_items }}">
+            </form>
+            {% else %}
+            <form class="add-to-cart-form" action="{% url 'add_to_cart' game.id %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="game_id" value="{{ game.id }}">
+                <input type="hidden" name="quantity" value="1">
+                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                <button class="btn btn-secondary" type="submit">Add to Cart</button>
+            </form>
+            {% endif %}
+            {% elif game.status == '2' %}
+            <button class="btn btn-secondary disabled">Back Ordered</button>
+            {% elif game.status == '3' %}
+            <button class="btn btn-secondary disabled">Out of Stock</button>
+            {% endif %}
 
 
-                {% if cart_items|length > 0 %}
-                    {% for item in cart_items %}
-                        {% if item.game_id|add:0 == game.id|add:0 %}
-                            <button class="btn btn-secondary increment-quantity" type="button">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-
-            </div>
-        </div>
-
-        <div class="my-3">
-            {% with '1 2 3 4 5' as ratingArray %}
-
-                {% for i in ratingArray.split %}
-                    {% if game.rating >= i|add:"0" %}
-                        <i class="fa-solid fa-star"></i>
-                    {% else %}
-                        <i class="fa-regular fa-star"></i>
-                    {% endif %}
-                {% endfor %}
-
-            {% endwith %}
-        </div>
-
-
-        <div class="collapse-menus my-3">
-            <button class="btn background-grey w-75"
-                    data-target="#description-collapse"
-                    data-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="description-collapse">
-                Description <i class="fa-solid fa-caret-down"></i>
+            {% if cart_items|length > 0 %}
+            {% for item in cart_items %}
+            {% if item.game_id|add:0 == game.id|add:0 %}
+            <button class="btn btn-secondary increment-quantity" type="button">
+                <i class="fas fa-plus"></i>
             </button>
-            <div id="description-collapse" class="collapse">
-                <p class="m-3">{{ game.description }}</p>
-            </div>
-        </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
 
-        <div class="collapse-menus my-3">
-            <button class="btn background-grey w-75"
-                    data-target="#details-collapse"
-                    data-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="details-collapse">
-                Details <i class="fa-solid fa-caret-down"></i>
-            </button>
-            <div id="details-collapse" class="collapse">
-                <ul class="list-group list-group-horizontal details-list mt-3">
-                    <li class="list-group-item">Year</li>
-
-
-                    {% if game.year %}
-                        <li class="list-group-item">{{ game.year }}</li>
-                    {% else %}
-                        <li class="list-group-item">N/A</li>
-                    {% endif %}
-
-                </ul>
-                <ul class="list-group list-group-horizontal details-list">
-                    <li class="list-group-item">Developer</li>
-                    <li class="list-group-item">
-                        <strong>{{ game.developer }}</strong>
-                    </li>
-                </ul>
-                <ul class="list-group list-group-horizontal details-list">
-                    <li class="list-group-item">Publisher</li>
-                    <li class="list-group-item">
-                        <strong>{{ game.publisher }}</strong>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="collapse-menus my-3">
-            <button class="btn background-grey w-75"
-                    data-target="#shipping-collapse"
-                    data-toggle="collapse"
-                    aria-expanded="false"
-                    aria-controls="shipping-collapse">
-                Shipping <i class="fa-solid fa-caret-down"></i>
-            </button>
-            <div id="shipping-collapse" class="collapse">
-                <p class="m-3">All games will be delivered as keys to your email address.</p>
-            </div>
         </div>
     </div>
 
-    {% include 'components/footer/footer.html' %}
+    <div class="my-3">
+        {% with '1 2 3 4 5' as ratingArray %}
 
-    {% block postloadjs %}
-        <script src="{% static 'js/game_quantity.js' %}"></script>
-    {% endblock %}
+        {% for i in ratingArray.split %}
+        {% if game.rating >= i|add:"0" %}
+        <i class="fa-solid fa-star"></i>
+        {% else %}
+        <i class="fa-regular fa-star"></i>
+        {% endif %}
+        {% endfor %}
+
+        {% endwith %}
+    </div>
+
+
+    <div class="collapse-menus my-3">
+        <button class="btn background-grey w-75" data-target="#description-collapse" data-toggle="collapse"
+            aria-expanded="false" aria-controls="description-collapse">
+            Description <i class="fa-solid fa-caret-down"></i>
+        </button>
+        <div id="description-collapse" class="collapse">
+            <p class="m-3">{{ game.description }}</p>
+        </div>
+    </div>
+
+    <div class="collapse-menus my-3">
+        <button class="btn background-grey w-75" data-target="#details-collapse" data-toggle="collapse"
+            aria-expanded="false" aria-controls="details-collapse">
+            Details <i class="fa-solid fa-caret-down"></i>
+        </button>
+        <div id="details-collapse" class="collapse">
+            <ul class="list-group list-group-horizontal details-list mt-3">
+                <li class="list-group-item">Year</li>
+
+
+                {% if game.year %}
+                <li class="list-group-item">{{ game.year }}</li>
+                {% else %}
+                <li class="list-group-item">N/A</li>
+                {% endif %}
+
+            </ul>
+            <ul class="list-group list-group-horizontal details-list">
+                <li class="list-group-item">Developer</li>
+                <li class="list-group-item">
+                    <strong>{{ game.developer }}</strong>
+                </li>
+            </ul>
+            <ul class="list-group list-group-horizontal details-list">
+                <li class="list-group-item">Publisher</li>
+                <li class="list-group-item">
+                    <strong>{{ game.publisher }}</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="collapse-menus my-3">
+        <button class="btn background-grey w-75" data-target="#shipping-collapse" data-toggle="collapse"
+            aria-expanded="false" aria-controls="shipping-collapse">
+            Shipping <i class="fa-solid fa-caret-down"></i>
+        </button>
+        <div id="shipping-collapse" class="collapse">
+            <p class="m-3">All games will be delivered as keys to your email address.</p>
+        </div>
+    </div>
+</div>
+
+{% include 'components/footer/footer.html' %}
+
+{% block postloadjs %}
+<script src="{% static 'js/game_quantity.js' %}"></script>
+{% endblock %}
 {% endblock %}
