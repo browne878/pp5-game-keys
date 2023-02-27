@@ -372,3 +372,7 @@ a [Heroku](https://www.heroku.com/) account.
 ## **Credits**
 
 This app was built using only the documentation from Bootstrap, Django and JQuery.
+
+The fps_soldier images was taken from [here](https://unsplash.com/photos/yURb9KJ8vdc).
+
+All game images were sourced from the publisher's website.
