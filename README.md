@@ -10,6 +10,8 @@ My aim for Game Keys is to bring low cost games to everyone. I want to make them
 
 ## **Table of Contents**
 
+- ### [Business Model](https://github.com/browne878/pp5-game-keys#business-model-1)
+
 - ### [Planning](https://github.com/browne878/pp5-game-keys#planning-1)
 
 - ### [Features](https://github.com/browne878/pp5-game-keys#features-1)
@@ -21,15 +23,19 @@ My aim for Game Keys is to bring low cost games to everyone. I want to make them
 - ### [Testing](https://github.com/browne878/pp5-game-keys#testing-1)
 
 - ### [Bugs](https://github.com/browne878/pp5-game-keys#bugs-1)
-    - [Unfixed Bugs](https://github.com/browne878/pp5-game-keys#unfixed-bugs)
-    - [Fixed Bugs](https://github.com/browne878/pp5-game-keys#fixed-bugs)
+
+  - [Unfixed Bugs](https://github.com/browne878/pp5-game-keys#unfixed-bugs)
+  - [Fixed Bugs](https://github.com/browne878/pp5-game-keys#fixed-bugs)
 
 - ### [Deployment](https://github.com/browne878/pp5-game-keys#deployment-1)
-    - [Cloning/Forking Repository](https://github.com/browne878/pp5-game-keys#cloning--forking-repository)
-    - [Local Deployment](https://github.com/browne878/pp5-game-keys#local-deployment)
-    - [Remote Deployment](https://github.com/browne878/pp5-game-keys#remote-deployment)
+
+  - [Cloning/Forking Repository](https://github.com/browne878/pp5-game-keys#cloning--forking-repository)
+  - [Local Deployment](https://github.com/browne878/pp5-game-keys#local-deployment)
+  - [Remote Deployment](https://github.com/browne878/pp5-game-keys#remote-deployment)
 
 - ### [Credits](https://github.com/browne878/pp5-game-keys#credits-1)
+
+## **Business Model**
 
 ## **Planning**
 
@@ -79,6 +85,48 @@ git clone <URL>
 You have now forked and cloned the repository.
 
 ### Local Deployment
+
+Before deploying this application locally, you will need to clone or fork the repository. You can find these instructions
+[here]().
+
+1. First, you will need to install the requirements. To do so, run the following command.
+
+ ```
+pip install -r requirements.txt
+ ```
+
+2. Next, you will need to create an `env.py` file in the root directory of the project.
+3. Then, you will need to add the following to the `env.py` file.
+
+ ```
+import os
+ 
+os.environ["SECRET_KEY"] = "" - Randomly generated string
+os.environ["STRIPE_PUBLIC_KEY"] = "" - Stripe public key from your Stripe account
+os.environ["STRIPE_SECRET_KEY"] = "" - Stripe secret key from your Stripe account
+# os.environ["ENV"] = "True"
+```
+
+4. After this, you will need to run the commands below to migrate the models to the database.
+
+ ```
+python manage.py makemigrations
+python manage.py migrate
+ ```
+
+5. Then, you will need to create a superuser to access the admin panel.
+
+ ```
+python manage.py createsuperuser
+ ```
+
+6. Next, you will need to run the following command to run the application.
+
+ ```
+python manage.py runserver
+ ```
+
+ The application should now be running locally!
 
 ### Remote Deployment
 
