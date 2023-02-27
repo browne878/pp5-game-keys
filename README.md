@@ -10,26 +10,26 @@ My aim for Game Keys is to bring low cost games to everyone. I want to make them
 
 ## **Table of Contents**
 
-- ### [Planning]()
+- ### [Planning](https://github.com/browne878/pp5-game-keys#planning-1)
 
-- ### [Features]()
+- ### [Features](https://github.com/browne878/pp5-game-keys#features-1)
 
-- ### [Models]()
+- ### [Models](https://github.com/browne878/pp5-game-keys#models-1)
 
-- ### [Future Development]()
+- ### [Future Development](https://github.com/browne878/pp5-game-keys#future-development-1)
 
-- ### [Testing]()
+- ### [Testing](https://github.com/browne878/pp5-game-keys#testing-1)
 
-- ### [Bugs]()
-    - [Unfixed Bugs]()
-    - [Fixed Bugs]()
+- ### [Bugs](https://github.com/browne878/pp5-game-keys#bugs-1)
+    - [Unfixed Bugs](https://github.com/browne878/pp5-game-keys#unfixed-bugs)
+    - [Fixed Bugs](https://github.com/browne878/pp5-game-keys#fixed-bugs)
 
-- ### [Deployment](https://github.com/browne878/CodeSprint-Portfolio-Project-4#deployment-1)
-    - [Cloning/Forking Repository](https://github.com/browne878/CodeSprint-Portfolio-Project-4#cloning--forking-repository)
-    - [Local Deployment](https://github.com/browne878/CodeSprint-Portfolio-Project-4#local-deployment)
-    - [Remote Deployment](https://github.com/browne878/CodeSprint-Portfolio-Project-4#remote-deployment)
+- ### [Deployment](https://github.com/browne878/pp5-game-keys#deployment-1)
+    - [Cloning/Forking Repository](https://github.com/browne878/pp5-game-keys#cloning--forking-repository)
+    - [Local Deployment](https://github.com/browne878/pp5-game-keys#local-deployment)
+    - [Remote Deployment](https://github.com/browne878/pp5-game-keys#remote-deployment)
 
-- ### [Credits](https://github.com/browne878/CodeSprint-Portfolio-Project-4#credits-1)
+- ### [Credits](https://github.com/browne878/pp5-game-keys#credits-1)
 
 ## **Planning**
 
