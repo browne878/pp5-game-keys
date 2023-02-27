@@ -43,6 +43,41 @@ My aim for Game Keys is to bring low cost games to everyone. I want to make them
 
 ## **Models**
 
+- Subscription Model
+
+I decided to keep this model without a relationship to the other models. This is because I wanted to allow users who have not created an account
+to sign up to the newsletter. I also wanted to allow users to sign up to the newsletter without having to make a purchase.
+
+This model contains all the information required to maintain the subscription.
+
+I could have added a date that the user signed up to the newsletter. If I were to develop this further, I would add this field.
+
+- Game Model
+
+This model contains all the information required to maintain a game object. It has everything required to display a game on the website.
+
+- Order Item Model
+
+This model represents a game in an order. This is separate to allow for there to be multiple copies and contain the total price for the game.
+
+This model has a many to one relationship with the order model. This is because an order can have multiple order items.
+
+- Order Model
+
+This model represents an order. It contains all the information required to store for a model.
+
+This model has a one to many relationship with the order item model. This is because an order can have multiple order items.
+
+It also has a one to one relationship with the user model. This is because an order can only be made by one user.
+
+- Address Model
+
+This model represents an address. It contains all the information required to store for an address.
+
+This model has a one to one relationship with the user model. This is because an address can only be made by one user.
+
+![Game Keys Models](./readme/images/design/model_design.png)
+
 ## **Future Development**
 
 In the future, I would like to move administrative function to its own admin portal. This would simplify administrative tasks on the website.
