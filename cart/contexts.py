@@ -21,6 +21,8 @@ def cart_contents(request):
         game = get_object_or_404(Game, pk=game_id)
         total += quantity * game.price
         game_count += quantity
-        cart_items.append({"game_id": game_id, "quantity": quantity, "game": game})
+        cart_items.append(
+            {"game_id": game_id, "quantity": quantity, "game": game}
+        )
 
     return {"cart_items": cart_items, "total": total, "game_count": game_count}

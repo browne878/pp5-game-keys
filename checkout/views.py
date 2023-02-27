@@ -91,7 +91,8 @@ def checkout(request):
                         # If charge successful, redirect to success page
                         if charge.paid:
                             html_message = render_to_string(
-                                "email/order_confirmation.html", {"order": order}
+                                "email/order_confirmation.html",
+                                {"order": order}
                             )
 
                             send_mail(
@@ -103,7 +104,10 @@ def checkout(request):
                             )
 
                             return redirect(
-                                reverse("checkout_success", args=[order.order_number])
+                                reverse(
+                                    "checkout_success",
+                                    args=[order.order_number]
+                                )
                             )
                     except stripe.error.CardError:
                         print("Card declined")

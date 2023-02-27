@@ -13,7 +13,11 @@ class Order(models.Model):
     address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True)
     full_name = models.CharField(max_length=100, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
-    order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False)
+    order_total = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=False
+    )
     date = models.DateTimeField(auto_now_add=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
@@ -34,7 +38,11 @@ class OrderItem(models.Model):
     """Order item model"""
 
     order = models.ForeignKey(
-        Order, null=False, blank=False, on_delete=models.CASCADE, related_name="items"
+        Order,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        related_name="items"
     )
     game = models.ForeignKey(Game, null=True, on_delete=models.SET_NULL)
     quantity = models.IntegerField(null=False, blank=False)

@@ -91,6 +91,8 @@ For emails I tested the following:
 - Receiving the newsletter emails every 5 minutes.
 - Making and order and receiving an order confirmation email.
 
+Code Validation:
+
 ## **Bugs**
 
 ### Unfixed Bugs
