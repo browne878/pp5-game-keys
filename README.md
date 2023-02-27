@@ -47,11 +47,68 @@ My aim for Game Keys is to bring low cost games to everyone. I want to make them
 
 ## **Testing**
 
+### **Automated Testing**
+
+- Testing of all games page.
+
+I created a test to check if the page was loading correctly. I did this by creating a test class and then creating a test function.
+This function checks both the response code and the template used. I then ran the test and it passed.
+
+- Testing of home page.
+
+I created a test to check if the page was loading correctly. I did this by creating a test class and then creating a test function.
+This function checks both the response code and the template used. I then ran the test and it passed.
+
+- Newsletter signup page.
+
+I created a test to check if the page was loading correctly. I did this by creating a test class and then creating a test function.
+This function checks both the response code and the template used. I then ran the test and it passed.
+
+### **Manual Testing**
+
+On all pages of the website I tested the following:
+
+- All links work.
+- All buttons work.
+- All forms work.
+- All images load correctly.
+- All text is readable.
+- All text is in the correct place.
+- All content is correct.
+- Pages are responsive.
+- All pages are accessible.
+
+For the game creation pages, I tested the following:
+
+- Creating a game by manually navigating to the /games/add page.
+- Clicking the edit button above the game on the /games page and editing the game.
+- Clicking the delete button above the game on the /games page and deleting the game.
+
+For emails I tested the following:
+
+- Signing up to the newsletter.
+- Receiving confirmation of the sign up.
+- Receiving the newsletter emails every 5 minutes.
+- Making and order and receiving an order confirmation email.
+
 ## **Bugs**
 
 ### Unfixed Bugs
 
+- There is one existing issue within the application which still needs to be fixed. When the newsletter emails are sent to the user every 5 minutes,
+it runs the function twice, causing 2 emails to be sent to the user. This is a bug which I am still trying to fix.
+
 ### Fixed Bugs
+
+- Footer not stuck to the bottom of the page.
+
+This was caused by the content of the page not being long enough to fill the page. In order to resolve this, I added a low-content class to the content
+which would set the min-height of the content to 80vh. This would ensure that the content would always be at least 80% of the height of the page.
+
+- Able to checkout without being logged in.
+
+This issue was caused by the checkout page not checking if the user was logged in. In order to resolve this, I added a check to the checkout page
+which would redirect the user to the login page if they were not logged in.
 
 ## **Deployment**
 
