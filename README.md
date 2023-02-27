@@ -168,8 +168,9 @@ For emails I tested the following:
 
 - Signing up to the newsletter.
 - Receiving confirmation of the sign up.
-- Receiving the newsletter emails every 5 minutes.
 - Making and order and receiving an order confirmation email.
+
+Screenshots of the emails can be found [here](/readme/images/manual_testing/emails/).
 
 Code Validation:
 All python code has been run through the [CI Linting Tool](https://pep8ci.herokuapp.com/). The results can be found [here](/readme/images/code_validation/python/).
