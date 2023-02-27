@@ -45,6 +45,9 @@ My aim for Game Keys is to bring low cost games to everyone. I want to make them
 
 ## **Future Development**
 
+In the future, I would like to move administrative function to its own admin portal. This would simplify administrative tasks on the website.
+I would also add the ability to trigger newsletters manually as well as introduce new offers into the newsletters.
+
 ## **Testing**
 
 ### **Automated Testing**
@@ -92,6 +95,10 @@ For emails I tested the following:
 - Making and order and receiving an order confirmation email.
 
 Code Validation:
+All python code has been run through the [CI Linting Tool](https://pep8ci.herokuapp.com/).
+All css code has been run through the [W3C CSS Validation Tool](https://jigsaw.w3.org/css-validator/).
+
+I have been unable to validate the HTML code as the website uses Jinja templating. This means that the HTML code is not valid.
 
 ## **Bugs**
 
