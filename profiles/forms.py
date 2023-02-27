@@ -3,8 +3,8 @@ from .models import Address
 
 
 class AddressForm(forms.ModelForm):
-    """ Form for users to add their delivery address """
+    """Form for users to add their delivery address"""
 
     class Meta:
         model = Address
-        fields = '__all__'
+        fields = "__all__"

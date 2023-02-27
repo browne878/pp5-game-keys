@@ -7,4 +7,4 @@ def index(request):
     """
     A view that displays the home page
     """
-    return render(request, 'home/index.html')
+    return render(request, "home/index.html")

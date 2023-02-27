@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Address(models.Model):
-    """ Stores Users delivery address """
+    """Stores Users delivery address"""
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     address_line_1 = models.CharField(max_length=80)

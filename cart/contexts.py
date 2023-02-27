@@ -9,19 +9,18 @@ def cart_contents(request):
     are available when rendering every page
     """
 
-    cart = request.session.get('cart', {})
+    cart = request.session.get("cart", {})
 
     cart_items = []
     total = 0
     game_count = 0
 
     for game_id, quantity in cart.items():
-        if (game_id == 'total'):
+        if game_id == "total":
             continue
         game = get_object_or_404(Game, pk=game_id)
         total += quantity * game.price
         game_count += quantity
-        cart_items.append(
-            {'game_id': game_id, 'quantity': quantity, 'game': game})
+        cart_items.append({"game_id": game_id, "quantity": quantity, "game": game})
 
-    return {'cart_items': cart_items, 'total': total, 'game_count': game_count}
+    return {"cart_items": cart_items, "total": total, "game_count": game_count}

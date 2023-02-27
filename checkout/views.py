@@ -17,37 +17,36 @@ import stripe
 
 
 def checkout(request):
-    """ A view to handle the checkout process """
-    
-    cart = request.session.get('cart', {})
+    """A view to handle the checkout process"""
 
+    cart = request.session.get("cart", {})
 
     if cart == {}:  # if cart is empty
-        return redirect(reverse('cart'))
+        return redirect(reverse("cart"))
 
-    if request.method == 'POST':
-        request.session['form_submitted'] = True
+    if request.method == "POST":
+        request.session["form_submitted"] = True
 
-        token = request.POST['stripeToken']
+        token = request.POST["stripeToken"]
 
         user = get_object_or_404(User, pk=request.user.id)
 
         address_form_data = {
-            'user': user,
-            'address_line_1': request.POST['address-line-1'],
-            'address_line_2': request.POST['address-line-2'],
-            'city': request.POST['city'],
-            'county': request.POST['county'],
-            'country': request.POST['country'],
-            'post_code': request.POST['post-code'],
-            'phone_number': request.POST['phone-number']
+            "user": user,
+            "address_line_1": request.POST["address-line-1"],
+            "address_line_2": request.POST["address-line-2"],
+            "city": request.POST["city"],
+            "county": request.POST["county"],
+            "country": request.POST["country"],
+            "post_code": request.POST["post-code"],
+            "phone_number": request.POST["phone-number"],
         }
 
         order_form_data = {
-            'user': user,
-            'full_name': request.POST['full-name'],
-            'email': request.POST['email'],
-            'order_total': request.POST['order_total'],
+            "user": user,
+            "full_name": request.POST["full-name"],
+            "email": request.POST["email"],
+            "order_total": request.POST["order_total"],
         }
 
         address_form = AddressForm(address_form_data)
@@ -61,23 +60,23 @@ def checkout(request):
 
             address = Address.objects.get(user=user)
 
-            order_form_data['address'] = address
+            order_form_data["address"] = address
             order_form = OrderForm(order_form_data)
             if order_form.is_valid():
                 order = order_form.save()
 
                 for game_id, quantity in cart.items():
-                    if game_id == 'total':
+                    if game_id == "total":
                         continue
                     game = get_object_or_404(Game, pk=game_id)
                     order_item = OrderItem(
                         order=order,
                         game=game,
                         quantity=quantity,
-                        total=game.price * quantity
+                        total=game.price * quantity,
                     )
                     order_item.save()
-                    total = cart.get('total')
+                    total = cart.get("total")
                     stripe_total = round(total * 100)
                     stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -91,42 +90,46 @@ def checkout(request):
 
                         # If charge successful, redirect to success page
                         if charge.paid:
-                            html_message = render_to_string('email/order_confirmation.html', {'order': order})
-                            
+                            html_message = render_to_string(
+                                "email/order_confirmation.html", {"order": order}
+                            )
+
                             send_mail(
-                                f'Order Confirmation - {order.order_number}',
+                                f"Order Confirmation - {order.order_number}",
                                 strip_tags(html_message),
                                 settings.DEFAULT_FROM_EMAIL,
                                 [order.email],
-                                html_message=html_message
+                                html_message=html_message,
                             )
 
-                            return redirect(reverse('checkout_success', args=[order.order_number]))
+                            return redirect(
+                                reverse("checkout_success", args=[order.order_number])
+                            )
                     except stripe.error.CardError:
-                        print('Card declined')
+                        print("Card declined")
             else:
                 print(order_form.errors.as_data())
         else:
             print(address_form.errors.as_data())
 
-    template = 'checkout/checkout.html'
+    template = "checkout/checkout.html"
     context = {
-        'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
+        "stripe_public_key": settings.STRIPE_PUBLIC_KEY,
     }
 
     return render(request, template, context)
 
 
 def checkout_success(request, order_number):
-    """ A view to handle the checkout success page """
-    
+    """A view to handle the checkout success page"""
+
     order = get_object_or_404(Order, order_number=order_number)
-    cart = request.session.get('cart', {})
+    cart = request.session.get("cart", {})
     cart.clear()
-    request.session['cart'] = cart
-    template = 'checkout/checkout_success.html'
+    request.session["cart"] = cart
+    template = "checkout/checkout_success.html"
     context = {
-        'order': order,
+        "order": order,
     }
 
     return render(request, template, context)

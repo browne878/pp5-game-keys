@@ -3,7 +3,6 @@ from .views import index
 
 
 class TestHomePageViews(TestCase):
-
     def test_get_home_page(self):
         """
         Test that the home page is returned
