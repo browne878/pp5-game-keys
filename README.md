@@ -183,7 +183,7 @@ All css code has been run through the [W3C CSS Validation Tool](https://jigsaw.w
 
 All html code has been run through the [W3C HTML Validation Tool](https://validator.w3.org/). The results can be found [here](/readme/images/code_validation/html/).
 
-I have been unable to validate the HTML code as the website uses Jinja templating. This means that the HTML code is not valid.
+All javascript code has been run through the [JSHint](https://jshint.com/). The results can be found [here](/readme/images/code_validation/js/).
 
 ## **Bugs**
 
